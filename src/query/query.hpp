@@ -1,26 +1,36 @@
 #ifndef _QUERY_HPP_
 #define _QUERY_HPP_
 
+#include <iostream>
 #include <string>
-#include <boost/program_options/options_description.hpp>
-
-namespace po = boost::program_options;
-
-// Parse the cli itself
-void parse_cli(int arc, char *argv[]);
 
 // Represents the main object to manipulate to do the api query
 class Query {
-private:
+ private:
   std::string query;
 
-public:
-  Query() {query = "http://export.arxiv.org/api/query?search_query=";};
+ public:
+  Query()
+  {
+    query = "http://export.arxiv.org/api/query?search_query=";
+  };
 
-  std::string GetQuery() { return query; };
-  void AddSingleOrFirstField(std::string prefix, std::string &field);
-  void AddAndField(std::string prefix, std::string &field);
+  // Get the query as a string
+  std::string GetQuery()
+  {
+    return query;
+  };
+
+  friend std::ostream& operator<<(std::ostream& os, const Query& q)
+  {
+    os << q.query;
+    return os;
+  };
+
+  // Utility to construct the query
+  void AddSingleOrFirstField(std::string prefix, std::string field);
+  // Utility to construct the query
+  void AddAndField(std::string prefix, std::string field);
 };
-
 
 #endif

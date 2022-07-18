@@ -9,8 +9,7 @@ project(webarx
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_range_for)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_decltype_auto)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion)
 
 # Define the following linked targets

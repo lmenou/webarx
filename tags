@@ -30,8 +30,8 @@ $(VERBOSE)MAKESILENT	build/src/Makefile	/^$(VERBOSE)MAKESILENT = -s$/;"	m
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#   define ARCHITECTURE_ID /;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID /;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID$/;"	d	file:
-AddAndField	src/query/query.cpp	/^void Query::AddAndField(std::string prefix, std::string &field)$/;"	f	class:Query	typeref:typename:void
-AddSingleOrFirstField	src/query/query.cpp	/^void Query::AddSingleOrFirstField(std::string prefix, std::string &field)$/;"	f	class:Query	typeref:typename:void
+AddAndField	src/query/query.cpp	/^void Query::AddAndField(std::string prefix, std::string field)$/;"	f	class:Query	typeref:typename:void
+AddSingleOrFirstField	src/query/query.cpp	/^void Query::AddSingleOrFirstField(std::string prefix, std::string field)$/;"	f	class:Query	typeref:typename:void
 BOOST_MIN_VERSION	src/CMakeLists.txt	/^set(BOOST_MIN_VERSION 1.79.0)$/;"	v
 BOOST_REQUIRED_COMPONENTS	src/CMakeLists.txt	/^set(BOOST_REQUIRED_COMPONENTS$/;"	v
 CMAKE_AR	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_AR "\/Library\/Developer\/CommandLineTools\/usr\/bin\/ar")$/;"	v
@@ -170,13 +170,13 @@ Credits	README.md	/^## Credits$/;"	s	chapter:webarx
 DEC	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define DEC(/;"	d	file:
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 EQUALS	build/src/Makefile	/^EQUALS = =$/;"	m
-GetQuery	src/query/query.hpp	/^  std::string GetQuery() { return query; };$/;"	f	class:Query	typeref:typename:std::string
+GetQuery	src/query/query.hpp	/^  std::string GetQuery()$/;"	f	class:Query	typeref:typename:std::string
 HEX	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define HEX(/;"	d	file:
 PLATFORM_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define PLATFORM_ID /;"	d	file:
 PLATFORM_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define PLATFORM_ID$/;"	d	file:
 PLATFORM_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define PLATFORM_ID /;"	d	file:
 PLATFORM_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^# define PLATFORM_ID$/;"	d	file:
-Query	src/query/query.hpp	/^  Query() {query = "http:\/\/export.arxiv.org\/api\/query?search_query=";};$/;"	f	class:Query
+Query	src/query/query.hpp	/^  Query()$/;"	f	class:Query
 Query	src/query/query.hpp	/^class Query {$/;"	c
 RM	build/Makefile	/^RM = \/usr\/local\/Cellar\/cmake\/3.23.2\/bin\/cmake -E rm -f$/;"	m
 RM	build/src/Makefile	/^RM = \/usr\/local\/Cellar\/cmake\/3.23.2\/bin\/cmake -E rm -f$/;"	m
@@ -236,6 +236,7 @@ command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/Comman
 command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:1
 command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:0
 command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:1
+compose_query	src/query/query.cpp	/^void compose_query(int argc, char *argv[], Query &q)$/;"	f	typeref:typename:void
 default_target	build/Makefile	/^default_target: all$/;"	t
 default_target	build/src/Makefile	/^default_target: all$/;"	t
 depend	build/Makefile	/^depend:$/;"	t
@@ -272,7 +273,7 @@ nsfcd159440101	test.xml	/^<feed xmlns="http:\/\/www.w3.org\/2005\/Atom">$/;"	n	u
 opensearch	test.xml	/^  <opensearch:itemsPerPage xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">10<\/o/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
 opensearch	test.xml	/^  <opensearch:startIndex xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">0<\/open/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
 opensearch	test.xml	/^  <opensearch:totalResults xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">185513/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
-parse_cli	src/query/query.cpp	/^void parse_cli(int argc, char *argv[])$/;"	f	typeref:typename:void
+parse_cli	src/query/query.cpp	/^po::variables_map parse_cli(int argc, char *argv[])$/;"	f	typeref:typename:po::variables_map
 preinstall	build/Makefile	/^preinstall: all$/;"	t
 preinstall	build/src/Makefile	/^preinstall: all$/;"	t
 preinstall/fast	build/Makefile	/^preinstall\/fast:$/;"	t
