@@ -30,8 +30,10 @@ $(VERBOSE)MAKESILENT	build/src/Makefile	/^$(VERBOSE)MAKESILENT = -s$/;"	m
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#   define ARCHITECTURE_ID /;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID /;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID$/;"	d	file:
-AddAndField	src/query/query.cpp	/^void Query::AddAndField(std::string prefix, std::string &field) {$/;"	f	class:Query	typeref:typename:void
-AddSingleOrFirstField	src/query/query.cpp	/^void Query::AddSingleOrFirstField(std::string prefix,$/;"	f	class:Query	typeref:typename:void
+AddAndField	src/query/query.cpp	/^void Query::AddAndField(std::string prefix, std::string &field)$/;"	f	class:Query	typeref:typename:void
+AddSingleOrFirstField	src/query/query.cpp	/^void Query::AddSingleOrFirstField(std::string prefix, std::string &field)$/;"	f	class:Query	typeref:typename:void
+BOOST_MIN_VERSION	src/CMakeLists.txt	/^set(BOOST_MIN_VERSION 1.79.0)$/;"	v
+BOOST_REQUIRED_COMPONENTS	src/CMakeLists.txt	/^set(BOOST_REQUIRED_COMPONENTS$/;"	v
 CMAKE_AR	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_AR "\/Library\/Developer\/CommandLineTools\/usr\/bin\/ar")$/;"	v
 CMAKE_BINARY_DIR	build/Makefile	/^CMAKE_BINARY_DIR = \/Users\/lmenou\/Documents\/CPro\/webarx\/build$/;"	m
 CMAKE_BINARY_DIR	build/src/Makefile	/^CMAKE_BINARY_DIR = \/Users\/lmenou\/Documents\/CPro\/webarx\/build$/;"	m
@@ -46,7 +48,7 @@ CMAKE_CXX11_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^se
 CMAKE_CXX14_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX14_COMPILE_FEATURES "cxx_std_14;cxx_aggregate_default_initializers;cxx_attribute_de/;"	v
 CMAKE_CXX17_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX17_COMPILE_FEATURES "cxx_std_17")$/;"	v
 CMAKE_CXX20_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX20_COMPILE_FEATURES "cxx_std_20")$/;"	v
-CMAKE_CXX23_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX23_COMPILE_FEATURES "")$/;"	v
+CMAKE_CXX23_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX23_COMPILE_FEATURES "cxx_std_23")$/;"	v
 CMAKE_CXX98_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX98_COMPILE_FEATURES "cxx_std_98;cxx_template_template_parameters")$/;"	v
 CMAKE_CXX_ABI_COMPILED	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_ABI_COMPILED TRUE)$/;"	v
 CMAKE_CXX_BYTE_ORDER	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_BYTE_ORDER "LITTLE_ENDIAN")$/;"	v
@@ -61,15 +63,15 @@ CMAKE_CXX_COMPILER_ID	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE
 CMAKE_CXX_COMPILER_ID_RUN	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_ID_RUN 1)$/;"	v
 CMAKE_CXX_COMPILER_LOADED	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_LOADED 1)$/;"	v
 CMAKE_CXX_COMPILER_RANLIB	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_RANLIB "")$/;"	v
-CMAKE_CXX_COMPILER_VERSION	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_VERSION "12.0.0.12000032")$/;"	v
+CMAKE_CXX_COMPILER_VERSION	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_VERSION "13.0.0.13000027")$/;"	v
 CMAKE_CXX_COMPILER_VERSION_INTERNAL	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")$/;"	v
 CMAKE_CXX_COMPILER_WORKS	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_WORKS TRUE)$/;"	v
 CMAKE_CXX_COMPILER_WRAPPER	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILER_WRAPPER "")$/;"	v
 CMAKE_CXX_COMPILE_FEATURES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_COMPILE_FEATURES "cxx_std_98;cxx_template_template_parameters;cxx_std_11;cxx_alias/;"	v
 CMAKE_CXX_EXTENSIONS_COMPUTED_DEFAULT	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_EXTENSIONS_COMPUTED_DEFAULT "ON")$/;"	v
 CMAKE_CXX_IGNORE_EXTENSIONS	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IGNORE_EXTENSIONS inl;h;hpp;HPP;H;o;O;obj;OBJ;def;DEF;rc;RC)$/;"	v
-CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "\/Library\/Developer\/CommandLineTools\/usr\/include/;"	v
-CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX10./;"	v
+CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX/;"	v
+CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "\/Library\/Developer\/CommandLineTools\/SDKs\/MacOSX12./;"	v
 CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "\/Library\/Developer\/CommandLineTools\/SDKs\//;"	v
 CMAKE_CXX_IMPLICIT_LINK_LIBRARIES	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "c++")$/;"	v
 CMAKE_CXX_INCLUDE_REGEX_COMPLAIN	build/CMakeFiles/CMakeDirectoryInformation.cmake	/^set(CMAKE_CXX_INCLUDE_REGEX_COMPLAIN ${CMAKE_C_INCLUDE_REGEX_COMPLAIN})$/;"	v
@@ -125,6 +127,7 @@ CMAKE_MAKEFILE_PRODUCTS	build/CMakeFiles/Makefile.cmake	/^set(CMAKE_MAKEFILE_PRO
 CMAKE_MT	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_MT "")$/;"	v
 CMAKE_OBJDUMP	build/cmake_install.cmake	/^  set(CMAKE_OBJDUMP "\/Library\/Developer\/CommandLineTools\/usr\/bin\/objdump")$/;"	v
 CMAKE_OBJDUMP	build/src/cmake_install.cmake	/^  set(CMAKE_OBJDUMP "\/Library\/Developer\/CommandLineTools\/usr\/bin\/objdump")$/;"	v
+CMAKE_OSX_DEPLOYMENT_TARGET	CMakeLists.txt	/^set(CMAKE_OSX_DEPLOYMENT_TARGET "12.0" CACHE STRING "Minimum OS X deployment version")$/;"	v
 CMAKE_RANLIB	build/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake	/^set(CMAKE_RANLIB "\/Library\/Developer\/CommandLineTools\/usr\/bin\/ranlib")$/;"	v
 CMAKE_RELATIVE_PATH_TOP_BINARY	build/CMakeFiles/CMakeDirectoryInformation.cmake	/^set(CMAKE_RELATIVE_PATH_TOP_BINARY "\/Users\/lmenou\/Documents\/CPro\/webarx\/build")$/;"	v
 CMAKE_RELATIVE_PATH_TOP_BINARY	build/src/CMakeFiles/CMakeDirectoryInformation.cmake	/^set(CMAKE_RELATIVE_PATH_TOP_BINARY "\/Users\/lmenou\/Documents\/CPro\/webarx\/build")$/;"	v
@@ -229,10 +232,10 @@ cmake_check_build_system	build/Makefile	/^cmake_check_build_system:$/;"	t
 cmake_check_build_system	build/src/Makefile	/^cmake_check_build_system:$/;"	t
 cmake_force	build/Makefile	/^cmake_force:$/;"	t
 cmake_force	build/src/Makefile	/^cmake_force:$/;"	t
-command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++    -isysroot \/Library\/Deve/;"	s	object:0
-command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++    -isysroot \/Library\/Deve/;"	s	object:1
-command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++    -isysroot \/Library\/Deve/;"	s	object:0
-command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++    -isysroot \/Library\/Deve/;"	s	object:1
+command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:0
+command	build/compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:1
+command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:0
+command	compile_commands.json	/^  "command": "\/Library\/Developer\/CommandLineTools\/usr\/bin\/c++ -DBOOST_PROGRAM_OPTIONS_DYN_/;"	s	object:1
 default_target	build/Makefile	/^default_target: all$/;"	t
 default_target	build/src/Makefile	/^default_target: all$/;"	t
 depend	build/Makefile	/^depend:$/;"	t
@@ -264,11 +267,12 @@ info_version	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char
 info_version_internal	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_version_internal[] = {$/;"	v	typeref:typename:char const[]
 info_version_internal	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_version_internal = "INFO" ":" "compiler_version_internal[" COMPILER_VERSION_INT/;"	v	typeref:typename:char const *
 main	build/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^int main(int argc, char* argv[])$/;"	f	typeref:typename:int
-main	src/main.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+main	src/main.cpp	/^int main(int argc, char *argv[])$/;"	f	typeref:typename:int
 nsfcd159440101	test.xml	/^<feed xmlns="http:\/\/www.w3.org\/2005\/Atom">$/;"	n	uri:http://www.w3.org/2005/Atom
 opensearch	test.xml	/^  <opensearch:itemsPerPage xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">10<\/o/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
 opensearch	test.xml	/^  <opensearch:startIndex xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">0<\/open/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
 opensearch	test.xml	/^  <opensearch:totalResults xmlns:opensearch="http:\/\/a9.com\/-\/spec\/opensearch\/1.1\/">185513/;"	n	uri:http://a9.com/-/spec/opensearch/1.1/
+parse_cli	src/query/query.cpp	/^void parse_cli(int argc, char *argv[])$/;"	f	typeref:typename:void
 preinstall	build/Makefile	/^preinstall: all$/;"	t
 preinstall	build/src/Makefile	/^preinstall: all$/;"	t
 preinstall/fast	build/Makefile	/^preinstall\/fast:$/;"	t
