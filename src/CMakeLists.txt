@@ -5,13 +5,6 @@ target_sources(query
     ${CMAKE_CURRENT_SOURCE_DIR}/query/query.cpp
     )
 
-add_library(cli "")
-target_sources(cli 
-    PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/query/cli.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/query/cli.cpp
-    )
-
 # Not useful yet
 # FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
 #                          GIT_TAG beb9e98806bb84bcc130a2cebfbcbbc6ce62b335)
@@ -35,5 +28,4 @@ find_package(
     COMPONENTS ${BOOST_REQUIRED_COMPONENTS}
 )
 
-target_link_libraries(cli PUBLIC  Boost::program_options)
-target_link_libraries(query PUBLIC  cli)
+target_link_libraries(query PUBLIC Boost::program_options)
