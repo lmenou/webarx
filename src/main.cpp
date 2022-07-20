@@ -3,12 +3,16 @@
 
 #include "query/query.hpp"
 
-int main(int argc, char *argv[])
-{
+using std::cout;
+
+int main(int argc, char *argv[]) {
   Query q;
   q.Compose(argc, argv);
 
-  std::cout << "The query is:\n" << q << "\n";
+  cout << "The query is:\n" << q << "\n";
+
+  std::string response  = q.Fetch();
+  cout << response << "\n";
 
   return 0;
 }

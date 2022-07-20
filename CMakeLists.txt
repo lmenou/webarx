@@ -9,8 +9,7 @@ project(webarx
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion)
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 # Define the following linked targets
 # - query
@@ -18,4 +17,5 @@ add_subdirectory(src)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC  
     query
+    parse
 )
