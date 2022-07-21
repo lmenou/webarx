@@ -52,7 +52,7 @@ void Query::Compose(int argc, char *argv[]) {
   // TODO: Not elegant, I do not know how to make this in C++17...
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      this->AddField(v.first, w, "AND");
+      this->AddField(v.first, w, "ANDOR");
     }
   }
 

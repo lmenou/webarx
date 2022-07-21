@@ -13,6 +13,7 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 
 # Define the following linked targets
 # - query
+# - parse
 add_subdirectory(src)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC  
