@@ -10,11 +10,11 @@ namespace po = boost::program_options;
 const std::string Query::address =
     "http://export.arxiv.org/api/query?search_query=";
 
-void Query::AddField(std::string prefix, std::string field, std::string andor) {
+void Query::addField(std::string prefix, std::string field, std::string andor) {
   query += "+" + andor + "+" + prefix + ":" + field;
 };
 
-void Query::Prepare() {
+void Query::prepare() {
   std::string::size_type n = 0;
   query = query.substr(1);
 
@@ -30,7 +30,7 @@ void Query::Prepare() {
   query = address + query;
 };
 
-void Query::Compose(int argc, char *argv[]) {
+void Query::compose(int argc, char *argv[]) {
   // clang-format off
   po::options_description desc("Allowed options to construct a query");
   desc.add_options()
@@ -52,14 +52,14 @@ void Query::Compose(int argc, char *argv[]) {
   // TODO: Not elegant, I do not know how to make this in C++17...
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      this->AddField(v.first, w, "ANDOR");
+      this->addField(v.first, w, "ANDOR");
     }
   }
 
-  this->Prepare();
+  this->prepare();
 };
 
-std::string Query::Fetch() {
+std::string Query::fetch() const {
   cpr::Url url{query};
   cpr::Response r = cpr::Get(url);
 

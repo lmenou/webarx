@@ -2,19 +2,15 @@
 #include <iostream>
 #include <tinyxml2.h>
 
-std::vector<Parseditem> parse(std::string text) {
-
-  // This is super ugly, we can do better !
-  std::vector<Parseditem> result;
-
+void ParsedDoc::parse(std::string xmlresponse) {
   tinyxml2::XMLDocument doc;
-  doc.Parse(text.c_str());
+  doc.Parse(xmlresponse.c_str());
 
   tinyxml2::XMLHandle handle(&doc);
 
   tinyxml2::XMLElement *feed = handle.FirstChildElement("feed").ToElement();
 
-  Parseditem item;
+  ParsedItem item;
   if (feed) {
     for (tinyxml2::XMLNode *e = feed->FirstChildElement("entry"); e;
          e = e->NextSibling()) {
@@ -25,13 +21,13 @@ std::vector<Parseditem> parse(std::string text) {
         tinyxml2::XMLElement *url = el->FirstChildElement("id");
 
         if (summary)
-          item.abstract = summary->GetText();
+          item.setAbstract(summary->GetText());
 
         if (title)
-          item.title = title->GetText();
+          item.setTitle(title->GetText());
 
         if (url)
-          item.url = url->GetText();
+          item.setUrl(url->GetText());
 
         std::vector<std::string> authors;
         for (tinyxml2::XMLNode *auth = el->FirstChildElement("author"); auth;
@@ -40,12 +36,22 @@ std::vector<Parseditem> parse(std::string text) {
           if (a)
             authors.push_back(a->GetText());
         }
-        item.authors = authors;
+        item.setAuthors(authors);
       }
-
-      result.push_back(item);
+      parsedItems.push_back(item);
     }
   }
+}
 
-  return result;
+std::ostream &operator<<(std::ostream &os, const ParsedDoc &parsedDoc) {
+  std::vector<ParsedItem> items = parsedDoc.getItems();
+  for (auto it : items) {
+    os << it.getTitle() << "\n";
+    os << it.getUrl() << "\n";
+    for (auto auth : it.getAuthors()) {
+      os << auth << "\n";
+    }
+    os << "\n";
+  }
+  return os;
 }
