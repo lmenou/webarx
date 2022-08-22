@@ -33,7 +33,9 @@ private:
 
 public:
   std::vector<ParsedItem> getItems() const { return this->parsedItems; }
+  std::vector<std::string> getTitles() const;
   void parse(std::string xmlresponse);
+  void screenRenderer() const;
   friend std::ostream &operator<<(std::ostream &os, const ParsedDoc &parsedDoc);
 };
 

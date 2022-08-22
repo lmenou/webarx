@@ -50,5 +50,10 @@ find_package(
     COMPONENTS ${BOOST_REQUIRED_COMPONENTS}
 )
 
-target_link_libraries(query PUBLIC Boost::program_options cpr)
-target_link_libraries(parse PUBLIC tinyxml2)
+target_link_libraries(query PRIVATE Boost::program_options cpr)
+target_link_libraries(parse 
+    PRIVATE tinyxml2
+    PRIVATE ftxui::screen
+    PRIVATE ftxui::dom
+    PRIVATE ftxui::component
+)

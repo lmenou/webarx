@@ -12,8 +12,7 @@ int main(int argc, char *argv[]) {
 
   ParsedDoc docs;
   docs.parse(response);
-
-  std::cout << docs;
+  docs.screenRenderer();
 
   return EXIT_SUCCESS;
 }
