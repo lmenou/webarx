@@ -65,16 +65,54 @@ void ParsedDoc::screenRenderer() const {
   std::vector<std::string> titles = this->getTitles();
   int selected = 0;
 
-  auto menu_title = ftxui::Menu(&titles, &selected);
-  auto renderer = Renderer(menu_title, [&] {
+  auto menu_titles = ftxui::Menu(&titles, &selected);
+  auto menu_titles_window = Renderer(menu_titles, [&] {
     return ftxui::window(ftxui::text("Titles"),
-                         menu_title->Render() | ftxui::vscroll_indicator |
+                         menu_titles->Render() | ftxui::vscroll_indicator |
                              ftxui::frame |
                              size(ftxui::HEIGHT, ftxui::LESS_THAN, 10));
   });
 
-  auto screen = ftxui::ScreenInteractive::TerminalOutput();
-  screen.Loop(renderer);
+  auto abstract_window = ftxui::Renderer([&] {
+    std::string abstract = parsedItems[selected].getAbstract();
+    return ftxui::window(ftxui::text("Abstract"), ftxui::paragraph(abstract)) |
+           ftxui::flex;
+  });
+
+  auto url_window = ftxui::Renderer([&] {
+    std::string url = parsedItems[selected].getUrl();
+    return ftxui::window(ftxui::text("Url"), ftxui::text(url)) | ftxui::flex;
+  });
+
+  auto authors_window = ftxui::Renderer([&] {
+    std::string authors = [&] {
+      std::string res{};
+      for (auto name : parsedItems[selected].getAuthors()) {
+        res = res + name + "; ";
+      }
+      return res;
+    }();
+    return ftxui::window(ftxui::text("Authors"), ftxui::text(authors)) |
+           ftxui::flex;
+  });
+
+  auto concat = ftxui::Container::Horizontal({
+      authors_window,
+      url_window,
+  });
+
+  auto firstColumn = ftxui::Container::Vertical({
+      menu_titles_window,
+      concat,
+  });
+
+  auto global = ftxui::Container::Horizontal({
+      firstColumn,
+      abstract_window,
+  });
+
+  auto screen = ftxui::ScreenInteractive::FitComponent();
+  screen.Loop(global);
 }
 
 std::ostream &operator<<(std::ostream &os, const ParsedDoc &parsedDoc) {
