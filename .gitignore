@@ -1,6 +1,7 @@
 build/
 .clangd/
 .cache/
+virtual/
 
 compile_commands.json
 *.xml
