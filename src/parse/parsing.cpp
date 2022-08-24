@@ -92,26 +92,18 @@ void ParsedDoc::screenRenderer() const {
       }
       return res;
     }();
-    return ftxui::window(ftxui::text("Authors"), ftxui::text(authors)) |
+    return ftxui::window(ftxui::text("Authors"), ftxui::paragraph(authors)) |
            ftxui::flex;
   });
 
-  auto concat = ftxui::Container::Horizontal({
+  auto global = ftxui::Container::Vertical({
+      menu_titles_window,
+      abstract_window,
       authors_window,
       url_window,
   });
 
-  auto firstColumn = ftxui::Container::Vertical({
-      menu_titles_window,
-      concat,
-  });
-
-  auto global = ftxui::Container::Horizontal({
-      firstColumn,
-      abstract_window,
-  });
-
-  auto screen = ftxui::ScreenInteractive::FitComponent();
+  auto screen = ftxui::ScreenInteractive::Fullscreen();
   screen.Loop(global);
 }
 
