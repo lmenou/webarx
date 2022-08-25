@@ -1,7 +1,7 @@
 build/
 .clangd/
 .cache/
-virtual/
+cmakelsp/
 
 compile_commands.json
 *.xml
