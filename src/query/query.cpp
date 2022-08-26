@@ -37,9 +37,19 @@ void Query::compose(CliParser &clip) {
   this->prepare();
 };
 
-std::string Query::fetch() const {
+bool Query::fetch() {
   cpr::Url url{query};
   cpr::Response r = cpr::Get(url);
 
-  return r.text;
+  if (r.status_code == 0) {
+    std::cerr << r.error.message << std::endl;
+    return false;
+  } else if (r.status_code >= 400) {
+    std::cerr << "Error [" << r.status_code << "] making request" << std::endl;
+    return false;
+  } else {
+    response = r.text;
+  }
+
+  return true;
 };

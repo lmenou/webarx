@@ -4,15 +4,22 @@
 int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
+  Query q;
   if (cli.cliParsed()) {
-    Query q;
     q.compose(cli);
-    std::cout << q << "\n";
   } else {
     return EXIT_FAILURE;
   }
 
-  // std::string response = q.fetch();
+  bool success = q.fetch();
+  Response response{};
+  if (success) {
+    response = q.getResponse();
+  } else {
+    return EXIT_FAILURE;
+  }
+
+  std::cout << response << "\n";
 
   // ParsedDoc docs;
   // docs.parse(response);
