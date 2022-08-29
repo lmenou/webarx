@@ -1,29 +1,21 @@
-// #include "parse/parsing.hpp"
+#include "papers/papers.hpp"
 #include "query/query.hpp"
 
 int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
-  Query q;
-  if (cli.cliParsed()) {
-    q.compose(cli);
-  } else {
+  if (!cli.cliParsed()) {
     return EXIT_FAILURE;
   }
+  Query q(cli);
 
   bool success = q.fetch();
-  Response response{};
-  if (success) {
-    response = q.getResponse();
-  } else {
+  if (!success) {
     return EXIT_FAILURE;
   }
 
-  std::cout << response << "\n";
-
-  // ParsedDoc docs;
-  // docs.parse(response);
-  // docs.screenRenderer();
+  std::string response = q.getResponse();
+  Papers papers(response);
 
   return EXIT_SUCCESS;
 }

@@ -2,7 +2,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Wall -Wextra -Wpedantic)
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE query)
+target_link_libraries(${PROJECT_NAME} PRIVATE query papers)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../)
 
@@ -16,28 +16,29 @@ add_library(query "")
 target_sources(query PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/query/query.cpp)
 target_link_libraries(query PUBLIC cliparse cpr)
 
-# add_library(parse "") target_sources(parse PRIVATE
-# ${CMAKE_CURRENT_SOURCE_DIR}/parse/parsing.hpp
-# ${CMAKE_CURRENT_SOURCE_DIR}/parse/parsing.cpp) target_compile_features(parse
-# PUBLIC cxx_std_17) target_link_libraries(parse PRIVATE tinyxml2 ftxui::screen
-# ftxui::dom ftxui::component)
+add_library(papers "")
+target_sources(papers PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/papers/papers.cpp)
+target_compile_features(papers PUBLIC cxx_std_17)
+target_link_libraries(papers PRIVATE tinyxml2)
 
 include(FetchContent)
 FetchContent_Declare(
   cpr
   GIT_REPOSITORY https://github.com/libcpr/cpr.git
   GIT_TAG beb9e98806bb84bcc130a2cebfbcbbc6ce62b335)
-# FetchContent_Declare( tinyxml2 GIT_REPOSITORY
-# https://github.com/leethomason/tinyxml2.git GIT_TAG
-# 1dee28e51f9175a31955b9791c74c430fe13dc82) FetchContent_Declare( ftxui
-# GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui GIT_TAG
+FetchContent_Declare(
+  tinyxml2
+  GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+  GIT_TAG 1dee28e51f9175a31955b9791c74c430fe13dc82)
+
+# FetchContent_Declare( ftxui GIT_REPOSITORY
+# https://github.com/ArthurSonzogni/ftxui GIT_TAG
 # c033ca61ae8fb264542d0326d1309e0a3bde945a) FetchContent_GetProperties(ftxui)
 # if(NOT ftxui_POPULATED) FetchContent_Populate(ftxui)
 # add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
 # endif()
 
-# FetchContent_MakeAvailable(cpr tinyxml2)
-FetchContent_MakeAvailable(cpr)
+FetchContent_MakeAvailable(cpr tinyxml2)
 
 # BOOST !
 set(BOOST_REQUIRED_COMPONENTS program_options)

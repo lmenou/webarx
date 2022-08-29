@@ -26,7 +26,7 @@ void Query::prepare() {
   query = address + query;
 };
 
-void Query::compose(CliParser &clip) {
+Query::Query(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
