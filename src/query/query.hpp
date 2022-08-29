@@ -5,18 +5,20 @@
 #include "response.hpp"
 #include <iostream>
 
+typedef std::string Url;
+
 class Query {
 private:
-  std::string query{};
+  Url query{};
   Response response{};
   static const std::string address;
-
-public:
-  std::string getQuery() const { return query; }
-  Response getResponse() const { return response; }
   void addField(std::string prefix, std::string field, std::string andor);
   void prepare();
+
+public:
   void compose(CliParser &clip);
+  Url getQuery() const { return query; }
+  Response getResponse() const { return response; }
   bool fetch();
 
   friend std::ostream &operator<<(std::ostream &os, const Query &q) {

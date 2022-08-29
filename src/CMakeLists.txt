@@ -7,15 +7,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE query)
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../)
 
 add_library(cliparse "")
-target_sources(
-  cliparse PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/cliparser/cliparser.hpp
-                   ${CMAKE_CURRENT_SOURCE_DIR}/cliparser/cliparser.cpp)
+target_sources(cliparse
+               PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/cliparser/cliparser.cpp)
 target_compile_features(cliparse PUBLIC cxx_std_17)
 target_link_libraries(cliparse PUBLIC Boost::program_options)
 
 add_library(query "")
-target_sources(query PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/query/query.hpp
-                             ${CMAKE_CURRENT_SOURCE_DIR}/query/query.cpp)
+target_sources(query PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/query/query.cpp)
 target_link_libraries(query PUBLIC cliparse cpr)
 
 # add_library(parse "") target_sources(parse PRIVATE
