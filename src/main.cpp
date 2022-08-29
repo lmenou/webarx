@@ -1,5 +1,6 @@
 #include "papers/papers.hpp"
 #include "query/query.hpp"
+#include "tui/tui.hpp"
 
 int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
@@ -16,6 +17,9 @@ int main(int argc, char *argv[]) {
 
   std::string response = q.getResponse();
   Papers papers(response);
+
+  TUI tui;
+  tui.show(papers);
 
   return EXIT_SUCCESS;
 }

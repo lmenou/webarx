@@ -38,4 +38,16 @@ Papers::Papers(std::string &response) {
       papers.push_back(paper);
     }
   }
+
+  papers_count = papers.size();
+}
+
+std::vector<std::string> Papers::getTitles() {
+  std::vector<std::string> titles{};
+
+  for (auto paper : papers) {
+    titles.push_back(paper.title);
+  }
+
+  return titles;
 }

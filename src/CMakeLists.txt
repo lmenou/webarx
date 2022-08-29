@@ -2,7 +2,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Wall -Wextra -Wpedantic)
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE query papers)
+target_link_libraries(${PROJECT_NAME} PRIVATE query tui)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../)
 
@@ -21,6 +21,16 @@ target_sources(papers PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/papers/papers.cpp)
 target_compile_features(papers PUBLIC cxx_std_17)
 target_link_libraries(papers PRIVATE tinyxml2)
 
+add_library(tui "")
+target_sources(tui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tui/tui.cpp)
+target_compile_features(papers PUBLIC cxx_std_17)
+target_link_libraries(
+  tui
+  PUBLIC papers
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component)
+
 include(FetchContent)
 FetchContent_Declare(
   cpr
@@ -31,12 +41,15 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
   GIT_TAG 1dee28e51f9175a31955b9791c74c430fe13dc82)
 
-# FetchContent_Declare( ftxui GIT_REPOSITORY
-# https://github.com/ArthurSonzogni/ftxui GIT_TAG
-# c033ca61ae8fb264542d0326d1309e0a3bde945a) FetchContent_GetProperties(ftxui)
-# if(NOT ftxui_POPULATED) FetchContent_Populate(ftxui)
-# add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
-# endif()
+FetchContent_Declare(
+  ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  GIT_TAG c033ca61ae8fb264542d0326d1309e0a3bde945a)
+FetchContent_GetProperties(ftxui)
+if(NOT ftxui_POPULATED)
+  FetchContent_Populate(ftxui)
+  add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
 
 FetchContent_MakeAvailable(cpr tinyxml2)
 
