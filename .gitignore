@@ -2,6 +2,7 @@ build/
 .clangd/
 .cache/
 cmakelsp/
+test/
 
 compile_commands.json
 *.xml

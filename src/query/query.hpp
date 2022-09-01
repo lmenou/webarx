@@ -3,13 +3,17 @@
 
 #include "../cliparser/cliparser.hpp"
 #include <iostream>
+#include <map>
 
 class Query {
 private:
   std::string query{};
   std::string response{};
   static const std::string address;
-  void addField(std::string prefix, std::string field, std::string andor);
+  static const std::map<std::string, std::string> prefixes;
+  void addField(const std::string prefix, const std::string field);
+  std::string findPrefix(const std::map<std::string, std::string> &prefixes,
+                         const std::string &cli_prefix);
   void prepare();
 
 public:

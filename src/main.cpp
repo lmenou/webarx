@@ -6,13 +6,18 @@ int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
   if (!cli.cliParsed()) {
-    return EXIT_FAILURE;
+    std::cout << "It seems that the CLI was misused..."
+              << "\n";
+    return EXIT_SUCCESS;
   }
   Query q(cli);
 
   bool success = q.fetch();
   if (!success) {
-    return EXIT_FAILURE;
+    std::cerr
+        << "Fetching did not succeed... please check your network connection."
+        << "\n";
+    return EXIT_SUCCESS;
   }
 
   std::string response = q.getResponse();

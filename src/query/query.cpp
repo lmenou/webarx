@@ -3,11 +3,31 @@
 
 namespace po = boost::program_options;
 
-const std::string Query::address =
-    "http://export.arxiv.org/api/query?search_query=";
+const std::string Query::address{
+    "http://export.arxiv.org/api/query?search_query="};
 
-void Query::addField(std::string prefix, std::string field, std::string andor) {
-  query += "+" + andor + "+" + prefix + ":" + field;
+const std::map<std::string, std::string> Query::prefixes = {
+    {"title", "ti"},
+    {"authors", "au"},
+    {"abstract", "abs"},
+};
+
+std::string
+Query::findPrefix(const std::map<std::string, std::string> &prefixes,
+                  const std::string &cli_prefix) {
+  auto pos = prefixes.find(cli_prefix);
+  if (pos != prefixes.end()) {
+    return pos->second;
+  } else {
+    std::cerr
+        << "Ill formed cli prefixes, please report the error to the developper"
+        << "\n";
+    std::exit(1);
+  }
+};
+
+void Query::addField(std::string prefix, std::string field) {
+  query += "+ANDOR+" + prefix + ":" + field;
 };
 
 void Query::prepare() {
@@ -16,9 +36,10 @@ void Query::prepare() {
 
   n = query.find("+");
   if (n == std::string::npos) {
-    std::cout << "Wrong construct for query, report error..."
+    std::cerr << "Wrong construct for query, please report the error to the "
+                 "developper"
               << "\n";
-    exit(-1);
+    std::exit(1);
   } else {
     query = query.substr(n + 1);
   }
@@ -30,7 +51,7 @@ Query::Query(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      this->addField(v.first, w, "ANDOR");
+      this->addField(findPrefix(prefixes, v.first), w);
     }
   }
 
