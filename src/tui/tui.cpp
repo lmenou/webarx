@@ -22,13 +22,12 @@ void TUI::show(Papers &papers) {
 
   auto abstract_window = ftxui::Renderer([&] {
     std::string abstract = papers[selected].abstract;
-    return ftxui::window(ftxui::text("Abstract"), ftxui::paragraph(abstract)) |
-           ftxui::flex;
+    return ftxui::window(ftxui::text("Abstract"), ftxui::paragraph(abstract));
   });
 
   auto url_window = ftxui::Renderer([&] {
     std::string url = papers[selected].url;
-    return ftxui::window(ftxui::text("Url"), ftxui::text(url)) | ftxui::flex;
+    return ftxui::window(ftxui::text("Url"), ftxui::text(url));
   });
 
   auto authors_window = ftxui::Renderer([&] {
@@ -39,15 +38,22 @@ void TUI::show(Papers &papers) {
       }
       return res;
     }();
-    return ftxui::window(ftxui::text("Authors"), ftxui::paragraph(authors)) |
-           ftxui::flex;
+    return ftxui::window(ftxui::text("Authors"), ftxui::paragraph(authors));
+  });
+
+  auto info_window = ftxui::Container::Vertical({
+      url_window,
+      authors_window,
+  });
+
+  auto paper_window = ftxui::Container::Horizontal({
+      abstract_window,
+      info_window,
   });
 
   auto global = ftxui::Container::Vertical({
       menu_titles_window,
-      abstract_window,
-      authors_window,
-      url_window,
+      paper_window,
   });
 
   auto screen = ftxui::ScreenInteractive::Fullscreen();
