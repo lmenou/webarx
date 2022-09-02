@@ -12,7 +12,7 @@ void TUI::show(const Papers &papers) const {
   std::vector<std::string> titles = papers.getTitles();
   int selected = 0;
 
-  auto menu_titles = ftxui::Radiobox(&titles, &selected);
+  auto menu_titles = ftxui::Menu(&titles, &selected);
   auto menu_titles_window = Renderer(menu_titles, [&] {
     return ftxui::window(ftxui::text("Titles"),
                          menu_titles->Render() | ftxui::vscroll_indicator |
@@ -30,6 +30,11 @@ void TUI::show(const Papers &papers) const {
     return ftxui::window(ftxui::text("Url"), ftxui::text(url));
   });
 
+  auto date_window = ftxui::Renderer([&] {
+    std::string date = papers[selected].date;
+    return ftxui::window(ftxui::text("Posting Date"), ftxui::text(date));
+  });
+
   auto authors_window = ftxui::Renderer([&] {
     std::string authors = [&] {
       std::string res{};
@@ -43,6 +48,7 @@ void TUI::show(const Papers &papers) const {
 
   auto info_window = ftxui::Container::Horizontal({
       url_window,
+      date_window,
       authors_window,
   });
 

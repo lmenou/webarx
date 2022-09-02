@@ -9,6 +9,7 @@ struct Paper {
   std::string title{};
   std::string abstract{};
   std::string url{};
+  std::string date{};
   std::vector<std::string> authors{};
 };
 

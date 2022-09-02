@@ -19,11 +19,13 @@ Papers::Papers(std::string &response) {
         tinyxml2::XMLElement *summary = el->FirstChildElement("summary");
         tinyxml2::XMLElement *title = el->FirstChildElement("title");
         tinyxml2::XMLElement *url = el->FirstChildElement("id");
+        tinyxml2::XMLElement *date = el->FirstChildElement("updated");
 
         if (summary && title && url) {
           paper.abstract = summary->GetText();
           paper.title = title->GetText();
           paper.url = url->GetText();
+          paper.date = date->GetText();
         }
 
         std::vector<std::string> authors{};

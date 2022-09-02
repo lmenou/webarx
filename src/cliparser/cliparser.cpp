@@ -4,7 +4,7 @@
 
 CliParser::CliParser(int argc, char *argv[]) {
   // clang-format off
-  po::options_description desc("Allowed options to construct a query");
+  po::options_description desc("Allowed options to construct a query to Arxiv");
   desc.add_options()
     ("help,h", "Produce help message")
     ("title,T", po::value< std::vector<std::string> >()->multitoken(), "List of words that can be contained in the title")
