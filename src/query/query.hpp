@@ -11,6 +11,7 @@ private:
   std::string response{};
   static const std::string address;
   static const std::map<std::string, std::string> prefixes;
+  static const int max_results{300};
   void addField(const std::string prefix, const std::string field);
   std::string findPrefix(const std::map<std::string, std::string> &prefixes,
                          const std::string &cli_prefix);

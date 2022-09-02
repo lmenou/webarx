@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
   if (!cli.cliParsed()) {
-    std::cout << "It seems that the CLI was misused..."
+    std::cout << "It seems that the CLI was misused... Printing the help."
               << "\n";
     return EXIT_SUCCESS;
   }
@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
   }
 
   std::string response = q.getResponse();
+
   Papers papers(response);
 
   TUI tui;

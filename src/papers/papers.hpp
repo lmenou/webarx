@@ -20,12 +20,14 @@ private:
 public:
   Papers(std::string &response);
   std::vector<std::string> getTitles();
+  int size() { return papers_count; }
 
   Paper &operator[](int i) {
     if (i > papers_count) {
-      std::cout << "Index of paper out of bounds"
-                << "\n";
-      return papers[0];
+      std::cerr
+          << "Index of paper out of bounds, report the error to the developer."
+          << "\n";
+      std::exit(1);
     }
 
     return papers[i];

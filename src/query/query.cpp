@@ -20,14 +20,14 @@ Query::findPrefix(const std::map<std::string, std::string> &prefixes,
     return pos->second;
   } else {
     std::cerr
-        << "Ill formed cli prefixes, please report the error to the developper"
+        << "Ill formed cli prefixes, please report the error to the developer"
         << "\n";
     std::exit(1);
   }
 };
 
 void Query::addField(std::string prefix, std::string field) {
-  query += "+ANDOR+" + prefix + ":" + field;
+  query += "+AND+" + prefix + ":" + field;
 };
 
 void Query::prepare() {
@@ -37,7 +37,7 @@ void Query::prepare() {
   n = query.find("+");
   if (n == std::string::npos) {
     std::cerr << "Wrong construct for query, please report the error to the "
-                 "developper"
+                 "developer"
               << "\n";
     std::exit(1);
   } else {
@@ -45,17 +45,19 @@ void Query::prepare() {
   }
 
   query = address + query;
+  query += "&start=0&max_results=" + std::to_string(max_results);
+  query += "&sortBy=lastUpdatedDate&sortOrder=descending";
 };
 
 Query::Query(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      this->addField(findPrefix(prefixes, v.first), w);
+      addField(findPrefix(prefixes, v.first), w);
     }
   }
 
-  this->prepare();
+  prepare();
 };
 
 bool Query::fetch() {
