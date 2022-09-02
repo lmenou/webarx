@@ -1,6 +1,6 @@
-#include "papers/papers.hpp"
-#include "query/query.hpp"
-#include "tui/tui.hpp"
+#include "papers.hpp"
+#include "query.hpp"
+#include "tui.hpp"
 
 int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);

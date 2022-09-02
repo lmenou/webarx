@@ -1,7 +1,7 @@
 #ifndef _QUERY_HPP_
 #define _QUERY_HPP_
 
-#include "../cliparser/cliparser.hpp"
+#include "cliparser.hpp"
 #include <iostream>
 #include <map>
 

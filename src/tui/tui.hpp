@@ -1,4 +1,4 @@
-#include "../papers/papers.hpp"
+#include "papers.hpp"
 
 class TUI {
 public:
