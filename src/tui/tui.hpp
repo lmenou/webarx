@@ -2,5 +2,5 @@
 
 class TUI {
 public:
-  void show(Papers &papers);
+  void show(const Papers &papers) const;
 };

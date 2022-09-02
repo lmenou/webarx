@@ -8,11 +8,11 @@
 #include "ftxui/component/screen_interactive.hpp"
 #include "ftxui/dom/elements.hpp"
 
-void TUI::show(Papers &papers) {
+void TUI::show(const Papers &papers) const {
   std::vector<std::string> titles = papers.getTitles();
   int selected = 0;
 
-  auto menu_titles = ftxui::Menu(&titles, &selected);
+  auto menu_titles = ftxui::Radiobox(&titles, &selected);
   auto menu_titles_window = Renderer(menu_titles, [&] {
     return ftxui::window(ftxui::text("Titles"),
                          menu_titles->Render() | ftxui::vscroll_indicator |
@@ -41,19 +41,15 @@ void TUI::show(Papers &papers) {
     return ftxui::window(ftxui::text("Authors"), ftxui::paragraph(authors));
   });
 
-  auto info_window = ftxui::Container::Vertical({
+  auto info_window = ftxui::Container::Horizontal({
       url_window,
       authors_window,
   });
 
-  auto paper_window = ftxui::Container::Horizontal({
-      abstract_window,
-      info_window,
-  });
-
   auto global = ftxui::Container::Vertical({
       menu_titles_window,
-      paper_window,
+      abstract_window,
+      info_window,
   });
 
   auto screen = ftxui::ScreenInteractive::Fullscreen();

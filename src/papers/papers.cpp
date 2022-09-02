@@ -42,7 +42,7 @@ Papers::Papers(std::string &response) {
   papers_count = papers.size();
 }
 
-std::vector<std::string> Papers::getTitles() {
+std::vector<std::string> Papers::getTitles() const {
   std::vector<std::string> titles{};
 
   for (auto paper : papers) {
