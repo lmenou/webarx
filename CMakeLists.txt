@@ -6,4 +6,11 @@ project(
   DESCRIPTION "Grab on Arxiv (from the terminal?)"
   LANGUAGES CXX)
 
-add_subdirectory(src)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_compile_options(-Wall -Wextra -Wpedantic)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+include(NoInSourceBuild)
+
+add_subdirectory(src bin)
