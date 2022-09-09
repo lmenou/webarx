@@ -11,8 +11,9 @@ simple CLI to query the API of both websites. Let us have a direct access to
 new papers, their authors' names and their abstract right from the terminal !
 
 ## How to build ? :gear:
-The build of the software is cmake based. Some requirements are necessary
-though, e.g. boost and cmake.
+The build of the software is cmake based. Some requirements are necessary then,
+e.g. boost and cmake. Note that `git` is also a necessary requirement but I
+assume you have it if you read this.
 
 For instance on MacOS:
 ```shell
@@ -23,11 +24,13 @@ Once you have installed the dependencies, pull this repository and run ***from
 the root of the source tree***:
 ```shell
 cmake -B build -S .
-cmake --build build/
+cmake --build build
 ```
 
+Minor dependencies (see Credits) are fetched during the build.
+
 No system wide installation is planned yet. If all goes well, you shall find
-the executable in `./build/bin/`.
+the executable `webarx` in `./build/bin/`.
 
 ## How to try it out ?
 Well, the CLI is quite straightforward to understand so far. To print the help,
@@ -38,7 +41,7 @@ simply run the executable:
 
 ## Contributions and Bugs :thought_balloon:
 Provided you decipher my hieroglyphs, you are more than welcome to open a pull
-request or an issues. If you think that this code is ugly, I would also be glad
+request or an issue. If you think that this code is ugly, I would also be glad
 to receive some constructive critics.
 
 ## LICENSE :bookmark:
