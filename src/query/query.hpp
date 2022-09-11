@@ -2,6 +2,7 @@
 #define _QUERY_HPP_
 
 #include "cliparser.hpp"
+#include "field.hpp"
 #include <iostream>
 #include <map>
 
@@ -12,7 +13,7 @@ private:
   static const std::string address;
   static const std::map<std::string, std::string> prefixes;
   static const int max_results{300};
-  void addField(const std::string prefix, const std::string field);
+  void addField(const std::string prefix, const Field &field);
   std::string findPrefix(const std::map<std::string, std::string> &prefixes,
                          const std::string &cli_prefix);
   void prepare();

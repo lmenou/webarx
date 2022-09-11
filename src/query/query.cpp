@@ -26,8 +26,8 @@ Query::findPrefix(const std::map<std::string, std::string> &prefixes,
   }
 };
 
-void Query::addField(std::string prefix, std::string field) {
-  query += "+AND+" + prefix + ":" + field;
+void Query::addField(const std::string prefix, const Field &field) {
+  query += field.getBooleanOp() + prefix + ":" + field.getField();
 };
 
 void Query::prepare() {
@@ -53,7 +53,8 @@ Query::Query(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      addField(findPrefix(prefixes, v.first), w);
+      Field field(w);
+      addField(findPrefix(prefixes, v.first), field);
     }
   }
 
