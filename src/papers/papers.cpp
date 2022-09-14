@@ -37,7 +37,7 @@ Papers::Papers(std::string &response) {
         }
         paper.authors = authors;
       }
-      papers.push_back(paper);
+      papers.push_back(std::move(paper));
     }
   }
 
