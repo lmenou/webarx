@@ -22,17 +22,22 @@ BOOST_AUTO_TEST_CASE(print_the_help) {
 }
 
 BOOST_AUTO_TEST_CASE(parse_success) {
-  int argc = 5;
+  int argc = 7;
   char name[] = "name.cpp";
   char authors[] = "--authors";
   char author_name[] = "zola";
   char title[] = "--title";
   char title_value[] = "nana";
-  char *argv[] = {name, authors, author_name, title, title_value};
+  char abstract[] = "--abstract";
+  char word[] = "assommoir";
+  char *argv[] = {name,        authors,  author_name, title,
+                  title_value, abstract, word};
   CliParser cli(argc, argv);
 
   boost::program_options::variables_map vm = cli.getCliOptions();
   BOOST_CHECK(cli.cliParsed() == true);
-  BOOST_CHECK_EQUAL(vm["authors"].as<std::vector<std::string> >()[0], "zola");
-  BOOST_CHECK_EQUAL(vm["title"].as<std::vector<std::string> >()[0], "nana");
+  BOOST_CHECK_EQUAL(vm["authors"].as<std::vector<std::string>>()[0], "zola");
+  BOOST_CHECK_EQUAL(vm["title"].as<std::vector<std::string>>()[0], "nana");
+  BOOST_CHECK_EQUAL(vm["abstract"].as<std::vector<std::string>>()[0],
+                    "assommoir");
 }
