@@ -1,3 +1,3 @@
 include(BoostUnitTest)
 
-add_subdirectory(cliparse)
+add_subdirectory(cliparser)
