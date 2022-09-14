@@ -39,6 +39,13 @@ simply run the executable:
 ./build/bin/webarx --help
 ```
 
+## How to unit test ?
+Unit tests are all put in the directory test so far. Hence to run from the root
+of the project:
+```shell
+ctest --test-dir build/test
+```
+
 ## Contributions and Bugs :thought_balloon:
 Provided you decipher my hieroglyphs, you are more than welcome to open a pull
 request or an issue. If you think that this code is ugly, I would also be glad
