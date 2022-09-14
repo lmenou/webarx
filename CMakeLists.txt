@@ -14,3 +14,4 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(NoInSourceBuild)
 
 add_subdirectory(src bin)
+add_subdirectory(test)

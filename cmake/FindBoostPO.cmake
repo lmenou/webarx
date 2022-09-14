@@ -1,5 +1,1 @@
-set(BOOST_REQUIRED_COMPONENTS program_options)
-set(BOOST_MIN_VERSION 1.79.0)
-
-find_package(Boost ${BOOST_MIN_VERSION} REQUIRED
-             COMPONENTS ${BOOST_REQUIRED_COMPONENTS})
+find_package(Boost 1.79.0 REQUIRED COMPONENTS program_options)

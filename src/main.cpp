@@ -6,6 +6,8 @@ int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
   if (!cli.cliParsed()) {
+    std::cout << "Allowed options to construct a query:" << std::endl;
+    std::cout << cli.getDesc() << std::endl;
     return EXIT_SUCCESS;
   }
   Query q(cli);
