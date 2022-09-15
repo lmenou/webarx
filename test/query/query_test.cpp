@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(query_constructor2) {
   char authors[] = "--authors";
   char author_name[] = "del_maestro";
   char title[] = "--title";
-  char title_value[] = "ncheckerboard";
+  char title_value[] = "Ncheckerboard";
   char *argv[] = {name, authors, author_name, title, title_value};
   CliParser cli(argc, argv);
   Query q(cli);

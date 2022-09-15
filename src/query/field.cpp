@@ -2,7 +2,7 @@
 
 Field::Field(const std::string &cliArg) {
   const char boolLetter = cliArg[0];
-  if (boolLetter == 'n' || boolLetter == 'N') {
+  if (boolLetter == 'N') {
     booleanOp = "+ANDNOT+";
     for (auto it = cliArg.begin() + 1; it != cliArg.end(); ++it) {
       field.push_back(*it);
