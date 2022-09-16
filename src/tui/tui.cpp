@@ -12,6 +12,11 @@ void TUI::show(const Papers &papers) const {
   std::vector<std::string> titles = papers.getTitles();
   int selected = 0;
 
+  if (titles.empty()) {
+    std::cout << "No results for your query :,-(.\nPlease make a new one." << std::endl;
+    return;
+  }
+
   auto menu_titles = ftxui::Menu(&titles, &selected);
   auto menu_titles_window = Renderer(menu_titles, [&] {
     return ftxui::window(ftxui::text("Titles"),
