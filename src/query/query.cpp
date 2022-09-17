@@ -26,38 +26,59 @@ Query::findPrefix(const std::map<std::string, std::string> &prefixes,
   }
 };
 
-void Query::addField(const std::string prefix, const Field &field) {
-  query += field.getBooleanOp() + prefix + ":" + field.getField();
-};
-
-void Query::prepare() {
-  std::string::size_type n = 0;
-  query = query.substr(1);
-
-  n = query.find("+");
-  if (n == std::string::npos) {
-    std::cerr << "Wrong construct for query, please report the error to the "
-                 "developer"
-              << "\n";
-    std::exit(1);
-  } else {
-    query = query.substr(n + 1);
-  }
-
-  query = address + query;
-  query += "&start=0&max_results=" + std::to_string(max_results);
-  query += "&sortBy=lastUpdatedDate&sortOrder=descending";
-};
-
-Query::Query(CliParser &clip) {
+void Query::classifyFields(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
   for (auto v : vm) {
     for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      Field field(w);
-      addField(findPrefix(prefixes, v.first), field);
+      Field field(findPrefix(prefixes, v.first), w);
+      if (field.isNot()) {
+        andNotField.push_back(std::move(field));
+      } else {
+        andField.push_back(std::move(field));
+      }
+    }
+  }
+};
+
+void Query::prepare() {
+  bool isFirst = true;
+  std::string search_query{};
+  for (auto field : andField) {
+    if (isFirst) {
+      isFirst = false;
+      search_query += field.compose();
+    } else {
+      search_query += "+AND+" + field.compose();
     }
   }
 
+  if (!andNotField.empty()) {
+    isFirst = true;
+    search_query += "+ANDNOT+%28";
+    for (auto field : andNotField) {
+      if (isFirst) {
+        isFirst = false;
+        search_query += field.compose();
+      } else {
+        search_query += "+OR+" + field.compose();
+      }
+    }
+    search_query += "%29";
+  }
+
+  query = address + search_query;
+  query += "&start=0";
+  query += "&max_result=" + std::to_string(max_results);
+};
+
+Query::Query(CliParser &clip) {
+  classifyFields(clip);
+  if (andField.empty()) {
+    std::cout << "Please, compose a query with at least one non-negative "
+                 "field, otherwise, the query is useless."
+              << std::endl;
+    std::exit(1);
+  }
   prepare();
 };
 

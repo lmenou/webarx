@@ -12,13 +12,14 @@ BOOST_AUTO_TEST_CASE(query_constructor1) {
   char title_value[] = "checkerboard";
   char *argv[] = {name, authors, author_name, title, title_value};
   CliParser cli(argc, argv);
+
   Query q(cli);
 
   BOOST_CHECK_EQUAL(
       q.getQuery(),
       "http://export.arxiv.org/api/"
       "query?search_query=au:del_maestro+AND+ti:checkerboard&start=0&max_"
-      "results=300&sortBy=lastUpdatedDate&sortOrder=descending");
+      "results=300");
 }
 
 BOOST_AUTO_TEST_CASE(query_constructor2) {

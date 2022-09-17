@@ -1,14 +1,16 @@
 #include "field.hpp"
 
-Field::Field(const std::string &cliArg) {
+Field::Field(const std::string prefix, const std::string cliArg) {
+  field = prefix;
+
   const char boolLetter = cliArg[0];
   if (boolLetter == 'N') {
-    booleanOp = "+ANDNOT+";
+    notField = true;
     for (auto it = cliArg.begin() + 1; it != cliArg.end(); ++it) {
-      field.push_back(*it);
+      search.push_back(*it);
     }
   } else {
-    booleanOp = "+AND+";
-    field = cliArg;
+    search = cliArg;
+    notField = false;
   }
 }

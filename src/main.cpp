@@ -14,9 +14,8 @@ int main(int argc, char *argv[]) {
 
   bool success = q.fetch();
   if (!success) {
-    std::cerr
-        << "Fetching did not succeed... please check your network connection."
-        << "\n";
+    std::cerr << "Fetching did not succeed... please check your network "
+                 "connection.\n";
     return EXIT_SUCCESS;
   }
 

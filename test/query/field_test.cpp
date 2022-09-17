@@ -4,16 +4,19 @@
 
 BOOST_AUTO_TEST_CASE(constructor_no) {
   const std::string cli = "Nzola";
-  Field field(cli);
+  const std::string search = "title";
+  Field field(search, cli);
 
-  BOOST_CHECK_EQUAL(field.getField(), "zola");
-  BOOST_CHECK_EQUAL(field.getBooleanOp(), "+ANDNOT+");
+  BOOST_CHECK_EQUAL(field.isNot(), true);
+  BOOST_CHECK_EQUAL(field.compose(), "title:zola");
 }
 
 BOOST_AUTO_TEST_CASE(constructor_yes) {
   const std::string cli = "zola";
-  Field field(cli);
+  const std::string search = "title";
+  Field field(search, cli);
 
-  BOOST_CHECK_EQUAL(field.getField(), "zola");
-  BOOST_CHECK_EQUAL(field.getBooleanOp(), "+AND+");
+  BOOST_CHECK_EQUAL(field.isNot(), false);
+  BOOST_CHECK_EQUAL(field.compose(), "title:zola");
 }
+
