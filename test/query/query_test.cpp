@@ -33,9 +33,8 @@ BOOST_AUTO_TEST_CASE(query_constructor2) {
   CliParser cli(argc, argv);
   Query q(cli);
 
-  BOOST_CHECK_EQUAL(
-      q.getQuery(),
-      "http://export.arxiv.org/api/"
-      "query?search_query=au:del_maestro+ANDNOT+ti:checkerboard&start=0&max_"
-      "results=300&sortBy=lastUpdatedDate&sortOrder=descending");
+  BOOST_CHECK_EQUAL(q.getQuery(),
+                    "http://export.arxiv.org/api/"
+                    "query?search_query=au:del_maestro+ANDNOT+%28ti:"
+                    "checkerboard%29&start=0&max_results=300");
 }

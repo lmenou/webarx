@@ -6,7 +6,7 @@ function(add_boost_test SOURCE_FILE_NAME DEPENDENCY_LIB)
 
   add_executable(${TEST_EXECUTABLE_NAME} ${SOURCE_FILE_NAME})
   foreach(DEP ${DEPENDENCY_LIB})
-    target_link_libraries(${TEST_EXECUTABLE_NAME} ${DEPENDENCY_LIB})
+    target_link_libraries(${TEST_EXECUTABLE_NAME} ${DEP})
   endforeach()
   target_link_libraries(${TEST_EXECUTABLE_NAME}
                         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})

@@ -68,7 +68,7 @@ void Query::prepare() {
 
   query = address + search_query;
   query += "&start=0";
-  query += "&max_result=" + std::to_string(max_results);
+  query += "&max_results=" + std::to_string(max_results);
 };
 
 Query::Query(CliParser &clip) {
