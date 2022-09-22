@@ -1,16 +1,17 @@
 include(GNUInstallDirs)
 
-# install(
-#   TARGETS query
-#   EXPORT ${PROJECT_NAME}
-#   LIBRARY COMPONENT runtime
-#   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/webarx
-#                 COMPONENT runtime)
-# 
-# install(
-#   EXPORT ${PROJECT_NAME}
-#   DESTINATION ${CMAKE_INSTALL_LIBDIR}/webarx/cmake
-#   NAMESPACE webarx::
-#   COMPONENT runtime)
+install(
+  TARGETS cliparse
+  EXPORT WebArxLibs
+  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/webarx
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/webarx
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/webarx)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME COMPONENT runtime)
+install(
+  EXPORT WebArxLibs
+  FILE WebArxLibs.cmake
+  NAMESPACE WebArx::
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/webarx)
+
+install(FILES "WebArxConfig.cmake"
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/webarx)
