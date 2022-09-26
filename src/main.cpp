@@ -6,8 +6,9 @@ int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
   if (!cli.cliParsed()) {
-    std::cout << "Allowed options to construct a query:" << std::endl;
-    std::cout << cli.getDesc() << std::endl;
+    std::cout << "Usage: webarx [OPTIONS] [ARG]"
+              << "\n";
+    std::cout << cli.getDesc();
     return EXIT_SUCCESS;
   }
   Query q(cli);
