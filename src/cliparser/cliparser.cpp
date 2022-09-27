@@ -39,4 +39,9 @@ CliParser::CliParser(int argc, char *argv[]) {
     parsed = false;
     return;
   }
+
+  if (vm.count("version")) {
+    std::cout << "webarx 0.1.0\n";
+    std::exit(0);
+  }
 }

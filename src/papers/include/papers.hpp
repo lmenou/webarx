@@ -21,7 +21,14 @@ private:
 public:
   Papers(std::string &response);
   std::vector<std::string> getTitles() const;
-  int size() { return papers_count; }
+  int size() const { return papers_count; }
+  bool empty() const {
+    if (papers_count == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   const Paper &operator[](int i) const {
     if (i > papers_count) {
       std::cerr
