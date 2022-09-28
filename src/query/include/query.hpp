@@ -32,13 +32,13 @@ private:
   std::string query{};
   int max_results{};
 
-  static const std::string address;
   static const std::map<std::string, std::string> prefixes;
 
   void classifyFields(CliParser &clip);
   void prepare();
 
 public:
+  static const std::string address;
   Query(CliParser &clip);
   std::string getQuery() const { return query; }
   std::string getResponse() const { return response; }

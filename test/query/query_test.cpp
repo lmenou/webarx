@@ -33,12 +33,9 @@ BOOST_AUTO_TEST_CASE(query_constructor_yes) {
   CliParser cli(argc, argv);
 
   Query q(cli);
+  bool success = q.fetch();
 
-  BOOST_CHECK_EQUAL(
-      q.getQuery(),
-      "http://export.arxiv.org/api/"
-      "query?search_query=au:del_maestro+AND+ti:checkerboard&start=0&max_"
-      "results=300");
+  BOOST_CHECK_EQUAL(success, true);
 }
 
 BOOST_AUTO_TEST_CASE(query_constructor_no) {
@@ -50,12 +47,11 @@ BOOST_AUTO_TEST_CASE(query_constructor_no) {
   char title_value[] = "Ncheckerboard";
   char *argv[] = {name, authors, author_name, title, title_value};
   CliParser cli(argc, argv);
-  Query q(cli);
 
-  BOOST_CHECK_EQUAL(q.getQuery(),
-                    "http://export.arxiv.org/api/"
-                    "query?search_query=au:del_maestro+ANDNOT+%28ti:"
-                    "checkerboard%29&start=0&max_results=300");
+  Query q(cli);
+  bool success = q.fetch();
+
+  BOOST_CHECK_EQUAL(success, true);
 }
 
 BOOST_AUTO_TEST_CASE(query_constructor_max) {
@@ -69,10 +65,9 @@ BOOST_AUTO_TEST_CASE(query_constructor_max) {
   char num_max[] = "10";
   char *argv[] = {name, authors, author_name, title, title_value, max, num_max};
   CliParser cli(argc, argv);
-  Query q(cli);
 
-  BOOST_CHECK_EQUAL(q.getQuery(),
-                    "http://export.arxiv.org/api/"
-                    "query?search_query=au:del_maestro+ANDNOT+%28ti:"
-                    "checkerboard%29&start=0&max_results=10");
+  Query q(cli);
+  bool success = q.fetch();
+
+  BOOST_CHECK_EQUAL(success, true);
 }

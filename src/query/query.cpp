@@ -18,8 +18,7 @@ Field::Field(const std::string prefix, const std::string cliArg) {
 
 namespace po = boost::program_options;
 
-const std::string Query::address{
-    "http://export.arxiv.org/api/query?search_query="};
+const std::string Query::address{"http://export.arxiv.org/api/query"};
 
 const std::map<std::string, std::string> Query::prefixes = {
     {"title", "ti"},
@@ -54,27 +53,25 @@ void Query::prepare() {
       isFirst = false;
       search_query += field.compose();
     } else {
-      search_query += "+AND+" + field.compose();
+      search_query += " AND " + field.compose();
     }
   }
 
   if (!andNotField.empty()) {
     isFirst = true;
-    search_query += "+ANDNOT+%28";
+    search_query += " ANDNOT (";
     for (auto field : andNotField) {
       if (isFirst) {
         isFirst = false;
         search_query += field.compose();
       } else {
-        search_query += "+OR+" + field.compose();
+        search_query += " OR " + field.compose();
       }
     }
-    search_query += "%29";
+    search_query += ")";
   }
 
-  query = address + search_query;
-  query += "&start=0";
-  query += "&max_results=" + std::to_string(max_results);
+  query = search_query;
 };
 
 Query::Query(CliParser &clip) {
@@ -89,8 +86,14 @@ Query::Query(CliParser &clip) {
 };
 
 bool Query::fetch() {
-  cpr::Url url{query};
-  cpr::Response r = cpr::Get(url);
+  cpr::Url url{address};
+  cpr::Parameters parameters =
+      cpr::Parameters{{"search_query", query},
+                      {"start", "0"},
+                      {"max_results", std::to_string(max_results)},
+                      {"sortBy", "lastUpdatedDate"},
+                      {"sortOrder", "descending"}};
+  cpr::Response r = cpr::Get(url, parameters);
 
   if (r.status_code == 0) {
     std::cerr << r.error.message << std::endl;
