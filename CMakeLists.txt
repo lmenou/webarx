@@ -6,7 +6,7 @@ project(
   DESCRIPTION "Grab on Arxiv (from the terminal?)"
   LANGUAGES CXX)
 
-option(BUILD_WEBARX_TEST OFF "Build tests of the webarx project")
+option(WEBARX_BUILD_TESTS OFF "Build tests of the webarx project")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Wall -Wextra -Wpedantic)
@@ -17,7 +17,7 @@ include(NoInSourceBuild)
 
 add_subdirectory(src bin)
 
-if(${BUILD_WEBARX_TEST})
+if(${WEBARX_BUILD_TESTS})
   add_subdirectory(test)
 endif()
 
