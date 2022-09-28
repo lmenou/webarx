@@ -24,7 +24,7 @@ CliParser::CliParser(int argc, char *argv[]) {
       "front of the word\n"
       "  Example: webarx --abstract alcool Ngervaise")(
       "max-results,M", po::value<int>()->default_value(300),
-      "Maximum number of results you wish\n\n");
+      "Maximum number of results you wish\n");
 
   desc.add(generic).add(query);
 
