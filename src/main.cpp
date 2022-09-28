@@ -6,8 +6,8 @@ int main(int argc, char *argv[]) {
   CliParser cli(argc, argv);
 
   if (!cli.cliParsed()) {
-    std::cout << "Usage: webarx [OPTIONS] [ARG]"
-              << "\n";
+    std::cout << "Webscrap papers on ArXiv\n\n";
+    std::cout << "Usage: webarx [OPTIONS] [ARG]\n";
     std::cout << cli.getDesc();
     return EXIT_SUCCESS;
   }

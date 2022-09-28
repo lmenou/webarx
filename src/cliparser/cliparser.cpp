@@ -19,10 +19,12 @@ CliParser::CliParser(int argc, char *argv[]) {
       "name of the author\n"
       "  Example: webarx --authors zola Nmauppassant")(
       "abstract,R", po::value<std::vector<std::string>>()->multitoken(),
-      "List of words to search for in the resume or abstract"
+      "List of words to search for in the resume or abstract\n"
       "If you do not want to search for the word in the abstract, write N in "
       "front of the word\n"
-      "  Example: webarx --abstract alcool Ngervaise");
+      "  Example: webarx --abstract alcool Ngervaise")(
+      "max-results,M", po::value<int>()->default_value(300),
+      "Maximum number of results you wish\n\n");
 
   desc.add(generic).add(query);
 

@@ -27,32 +27,23 @@ const std::map<std::string, std::string> Query::prefixes = {
     {"abstract", "abs"},
 };
 
-std::string
-Query::findPrefix(const std::map<std::string, std::string> &prefixes,
-                  const std::string &cli_prefix) {
-  auto pos = prefixes.find(cli_prefix);
-  if (pos != prefixes.end()) {
-    return pos->second;
-  } else {
-    std::cerr
-        << "Ill formed cli prefixes, please report the error to the developer"
-        << "\n";
-    std::exit(1);
-  }
-};
-
 void Query::classifyFields(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
-  for (auto v : vm) {
-    for (auto w : vm[v.first].as<std::vector<std::string>>()) {
-      Field field(findPrefix(prefixes, v.first), w);
-      if (field.isNot()) {
-        andNotField.push_back(std::move(field));
-      } else {
-        andField.push_back(std::move(field));
+
+  for (const auto &[key, value] : prefixes) {
+    if (vm.count(key)) {
+      for (const auto &w : vm[key].as<std::vector<std::string>>()) {
+        Field field(value, w);
+        if (field.isNot()) {
+          andNotField.push_back(std::move(field));
+        } else {
+          andField.push_back(std::move(field));
+        }
       }
     }
   }
+
+  max_results = vm["max-results"].as<int>();
 };
 
 void Query::prepare() {

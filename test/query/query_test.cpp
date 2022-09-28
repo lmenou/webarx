@@ -1,8 +1,8 @@
 #define BOOST_TEST_MODULE "QueryTest"
 #include "cliparser.hpp"
 #include "query.hpp"
-#include <string>
 #include <boost/test/unit_test.hpp>
+#include <string>
 
 BOOST_AUTO_TEST_CASE(field_constructor_no) {
   const std::string cli = "Nzola";
@@ -56,4 +56,23 @@ BOOST_AUTO_TEST_CASE(query_constructor_no) {
                     "http://export.arxiv.org/api/"
                     "query?search_query=au:del_maestro+ANDNOT+%28ti:"
                     "checkerboard%29&start=0&max_results=300");
+}
+
+BOOST_AUTO_TEST_CASE(query_constructor_max) {
+  int argc = 7;
+  char name[] = "name.cpp";
+  char authors[] = "--authors";
+  char author_name[] = "del_maestro";
+  char title[] = "--title";
+  char title_value[] = "Ncheckerboard";
+  char max[] = "--max-results";
+  char num_max[] = "10";
+  char *argv[] = {name, authors, author_name, title, title_value, max, num_max};
+  CliParser cli(argc, argv);
+  Query q(cli);
+
+  BOOST_CHECK_EQUAL(q.getQuery(),
+                    "http://export.arxiv.org/api/"
+                    "query?search_query=au:del_maestro+ANDNOT+%28ti:"
+                    "checkerboard%29&start=0&max_results=10");
 }

@@ -24,20 +24,17 @@ public:
   }
 };
 
-
 class Query {
 private:
   std::vector<Field> andField{};
   std::vector<Field> andNotField{};
   std::string response{};
   std::string query{};
+  int max_results{};
 
   static const std::string address;
   static const std::map<std::string, std::string> prefixes;
-  static const int max_results{300};
 
-  std::string findPrefix(const std::map<std::string, std::string> &prefixes,
-                         const std::string &cli_prefix);
   void classifyFields(CliParser &clip);
   void prepare();
 
