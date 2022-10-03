@@ -31,10 +31,11 @@ private:
   std::string response{};
   std::string query{};
   int max_results{};
+  std::string sorting;
 
   static const std::map<std::string, std::string> prefixes;
 
-  void classifyFields(CliParser &clip);
+  void make(CliParser &clip);
   void prepare();
 
 public:

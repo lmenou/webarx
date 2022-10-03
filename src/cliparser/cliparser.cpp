@@ -24,7 +24,9 @@ CliParser::CliParser(int argc, char *argv[]) {
       "front of the word\n"
       "  Example: webarx --abstract alcool Ngervaise")(
       "max-results,M", po::value<int>()->default_value(300),
-      "Maximum number of results you wish\n");
+      "Maximum number of results you wish\n")(
+      "ascend,a", "Show results in ascending order, i.e, from the oldest to the "
+                "most recent\n");
 
   desc.add(generic).add(query);
 

@@ -26,7 +26,7 @@ const std::map<std::string, std::string> Query::prefixes = {
     {"abstract", "abs"},
 };
 
-void Query::classifyFields(CliParser &clip) {
+void Query::make(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
 
   for (const auto &[key, value] : prefixes) {
@@ -43,6 +43,11 @@ void Query::classifyFields(CliParser &clip) {
   }
 
   max_results = vm["max-results"].as<int>();
+  if (vm.count("ascend")) {
+    sorting = "ascending";
+  } else {
+    sorting = "descending";
+  }
 };
 
 void Query::prepare() {
@@ -75,7 +80,7 @@ void Query::prepare() {
 };
 
 Query::Query(CliParser &clip) {
-  classifyFields(clip);
+  make(clip);
   if (andField.empty()) {
     std::cout << "Please, compose a query with at least one non-negative "
                  "field, otherwise, the query is useless."
@@ -92,7 +97,7 @@ bool Query::fetch() {
                       {"start", "0"},
                       {"max_results", std::to_string(max_results)},
                       {"sortBy", "lastUpdatedDate"},
-                      {"sortOrder", "descending"}};
+                      {"sortOrder", sorting}};
   cpr::Response r = cpr::Get(url, parameters);
 
   if (r.status_code == 0) {
