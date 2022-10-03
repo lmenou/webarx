@@ -10,7 +10,7 @@ new papers, their authors' names and their abstract right from the terminal !
 This software targets mainly UNIX users (MacOS, Linux) and is not tested (yet?)
 on Windows, *BSD.   
 
-https://user-images.githubusercontent.com/72404196/193548510-90a65495-d949-4212-94df-15d60987e21d.mov
+<video src='https://user-images.githubusercontent.com/72404196/193548510-90a65495-d949-4212-94df-15d60987e21d.mov'><video/>
 
 ## How to build ? :gear:
 
