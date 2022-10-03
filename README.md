@@ -1,36 +1,46 @@
 # webarx
 Find paper on Arxiv :postbox: :bookmark_tabs: in your terminal !
 
-## WARNING: This is a work in progress ! :warning: :construction:
-In other words, ***use it at your own risk !***
-
 ## Problem :triumph:
-Subscribing or scrolling ArXiv or BioArxiv is time-consuming, there must be a
+Subscribing or scrolling ArXiv or is time-consuming, there must be a
 way to automate our need of curiosity. The aim of this project is to build a
-simple CLI to query the API of both websites. Let us have a direct access to
+simple CLI to query the API of the websites. Let us have a direct access to
 new papers, their authors' names and their abstract right from the terminal !
 
+This software targets mainly UNIX users (MacOS, Linux) and is not tested (yet?)
+on Windows, *BSD.   
+
+https://user-images.githubusercontent.com/72404196/193548510-90a65495-d949-4212-94df-15d60987e21d.mov
+
 ## How to build ? :gear:
-The build of the software is cmake based. Some requirements are necessary then,
-e.g. boost and cmake. Note that `git` is also a necessary requirement but I
-assume you have it if you read this.
+
+### Requirements :lock_with_ink_pen:
+The build of the software is cmake based. The following *needs* to be installed
+on the system:   
+- Boost, minimal version 1.78
+- Git, minimal version 2.37 (to fetch third party libraries)
+- CMake, minimal version 3.20   
+The software is also using libcurl under the hood, hence, you can speed up the
+build process by installing the latter. However, if not found, the library is
+fetched during configuration of the build (thank you very much
+[cpr](https://docs.libcpr.org/)!).   
 
 For instance on MacOS:
 ```shell
 brew install boost cmake
 ```
 
+### Build
 Once you have installed the dependencies, pull this repository and run ***from
 the root of the source tree***:
 ```shell
 cmake -B build -S .
-cmake --build build
+make -Cbuild -j10
 ```
 
 Minor dependencies (see Credits) are fetched during the build.
 
-No system wide installation is planned yet. If all goes well, you shall find
-the executable `webarx` in `./build/bin/`.
+If all goes well, you shall find the executable `webarx` in `./build/bin/`.
 
 ## How to try it out ?
 Well, the CLI is quite straightforward to understand so far. To print the help,
@@ -39,17 +49,26 @@ simply run the executable:
 ./build/bin/webarx --help
 ```
 
-## How to unit test ?
-Unit tests are all put in the directory test so far. Hence to run from the root
-of the project:
+## How to install ? :incoming_envelope:
+If you are satisfied with the software, and you wish to have it system wide, an
+install target is provided. After having run the build, simply write:
 ```shell
-ctest --test-dir build/test
+make -Cbuild install
+webarx -v
 ```
+
+I am working on an uninstall target, but I need to be careful with that, to not
+corrupt my system, and more importantly, yours. Hence, if you installed the
+software and you wish afterwards to uninstall it, have a look at the
+`build/install_manifest.txt`, and remove the specified directories (you should
+see directories created by cpr, tinyxml2, and ftxui libraries plus the webarx
+executable in your local bin).
 
 ## Contributions and Bugs :thought_balloon:
 Provided you decipher my hieroglyphs, you are more than welcome to open a pull
 request or an issue. If you think that this code is ugly, I would also be glad
-to receive some constructive critics.
+to receive some constructive critics. This is a work in progress, even in my
+view, some parts of the code are not elegant at all, I am working on it :grin:.
 
 ## LICENSE :bookmark:
 This software is MIT licensed. See the
