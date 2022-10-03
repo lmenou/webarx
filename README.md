@@ -20,7 +20,8 @@ on the system:
 - Boost, minimal version 1.78
 - Git, minimal version 2.37 (to fetch third party libraries)
 - CMake, minimal version 3.20   
-The software is also using libcurl under the hood, hence, you can speed up the
+
+The software is also using CURL under the hood, hence, you can speed up the
 build process by installing the latter. However, if not found, the library is
 fetched during configuration of the build (thank you very much
 [cpr](https://docs.libcpr.org/)!).   
@@ -35,7 +36,7 @@ Once you have installed the dependencies, pull this repository and run ***from
 the root of the source tree***:
 ```shell
 cmake -B build -S .
-make -Cbuild -j10
+make -Cbuild -j10# or simply make -Cbuild if no parallelization
 ```
 
 Minor dependencies (see Credits) are fetched during the build.
@@ -61,8 +62,8 @@ I am working on an uninstall target, but I need to be careful with that, to not
 corrupt my system, and more importantly, yours. Hence, if you installed the
 software and you wish afterwards to uninstall it, have a look at the
 `build/install_manifest.txt`, and remove the specified directories (you should
-see directories created by cpr, tinyxml2, and ftxui libraries plus the webarx
-executable in your local bin).
+see directories created by `cpr`, `tinyxml2`, and `ftxui` libraries plus the
+`webarx` executable in your local bin).
 
 ## Contributions and Bugs :thought_balloon:
 Provided you decipher my hieroglyphs, you are more than welcome to open a pull
