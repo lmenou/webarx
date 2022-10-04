@@ -2,10 +2,10 @@
 Find paper on Arxiv :postbox: :bookmark_tabs: in your terminal !
 
 ## Problem :triumph:
-Subscribing or scrolling ArXiv or is time-consuming, there must be a
-way to automate our need of curiosity. The aim of this project is to build a
-simple CLI to query the API of the websites. Let us have a direct access to
-new papers, their authors' names and their abstract right from the terminal !
+Subscribing or scrolling ArXiv or is time-consuming, there must be a way to
+automate our need of curiosity. The aim of this project is to build a simple
+CLI to query the API of the websites. Let us have a direct access to new
+papers, their authors' names and their abstract right from the terminal !
 
 This software targets mainly UNIX users (MacOS, Linux) and is not tested (yet?)
 on Windows, *BSD.   
@@ -17,13 +17,14 @@ on Windows, *BSD.
 ### Requirements :lock_with_ink_pen:
 The build of the software is cmake based. The following *needs* to be installed
 on the system:   
-- Boost, minimal version 1.78
+- OpenSSL, minimal version 2.8.3
+- CMake, minimal version 3.20
 - Git, minimal version 2.37 (to fetch third party libraries)
-- CMake, minimal version 3.20   
+- Boost, minimal version 1.78
 
-The software is also using CURL under the hood, hence, you can speed up the
-build process by installing the latter. However, if not found, the library is
-fetched during configuration of the build (thank you very much
+The software is also using [CURL](https://curl.se/) under the hood, hence, you
+can speed up the build process by installing the latter. However, if not found,
+the library is fetched during configuration of the build (thank you very much
 [cpr](https://docs.libcpr.org/)!).   
 
 For instance on MacOS:
@@ -31,12 +32,15 @@ For instance on MacOS:
 brew install boost cmake
 ```
 
+Debian based distributions users (e.g. Ubuntu), feel free to have a look at the
+[wiki](https://github.com/lmenou/webarx/wiki/Build-on-a-Debian-based-distribution)
+
 ### Build
 Once you have installed the dependencies, pull this repository and run ***from
 the root of the source tree***:
 ```shell
 cmake -B build -S .
-make -Cbuild -j10# or simply make -Cbuild if no parallelization
+make -Cbuild -j10 # or simply make -Cbuild, no parallelization
 ```
 
 Minor dependencies (see Credits) are fetched during the build.
