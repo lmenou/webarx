@@ -1,18 +1,21 @@
 #include "query.hpp"
 #include <cpr/cpr.h>
 
-Field::Field(const std::string prefix, const std::string cliArg) {
-  field = prefix;
+bool QueryUtil::isupper(char ch) {
+  return std::isupper(static_cast<unsigned char>(ch));
+}
 
-  const char boolLetter = cliArg[0];
-  if (boolLetter == 'N') {
-    notField = true;
+Field::Field(const std::string prefix, const std::string cliArg) {
+  _field = prefix;
+
+  char boolLetter = cliArg[0];
+  if (QueryUtil::isupper(boolLetter)) {
+    _fType = boolLetter;
     for (auto it = cliArg.begin() + 1; it != cliArg.end(); ++it) {
-      search.push_back(*it);
+      _search.push_back(*it);
     }
   } else {
-    search = cliArg;
-    notField = false;
+    _search = cliArg;
   }
 }
 
@@ -20,7 +23,7 @@ namespace po = boost::program_options;
 
 const std::string Query::address{"http://export.arxiv.org/api/query"};
 
-const std::map<std::string, std::string> Query::prefixes = {
+const std::map<std::string, std::string> Query::_prefixes = {
     {"title", "ti"},
     {"authors", "au"},
     {"abstract", "abs"},
@@ -29,31 +32,35 @@ const std::map<std::string, std::string> Query::prefixes = {
 void Query::make(CliParser &clip) {
   po::variables_map vm = clip.getCliOptions();
 
-  for (const auto &[key, value] : prefixes) {
+  for (const auto &[key, value] : _prefixes) {
     if (vm.count(key)) {
       for (const auto &w : vm[key].as<std::vector<std::string>>()) {
         Field field(value, w);
-        if (field.isNot()) {
-          andNotField.push_back(std::move(field));
+        if (QueryUtil::isupper(field.fieldType())) {
+          if (field.fieldType() == 'N') {
+            _andNotField.push_back(std::move(field));
+          } else {
+            _andOrField.push_back(std::move(field));
+          }
         } else {
-          andField.push_back(std::move(field));
+          _andField.push_back(std::move(field));
         }
       }
     }
   }
 
-  max_results = vm["max-results"].as<int>();
+  _max_results = vm["max-results"].as<int>();
   if (vm.count("ascend")) {
-    sorting = "ascending";
+    _sorting = "ascending";
   } else {
-    sorting = "descending";
+    _sorting = "descending";
   }
 };
 
 void Query::prepare() {
   bool isFirst = true;
   std::string search_query{};
-  for (auto field : andField) {
+  for (auto &field : _andField) {
     if (isFirst) {
       isFirst = false;
       search_query += field.compose();
@@ -62,10 +69,16 @@ void Query::prepare() {
     }
   }
 
-  if (!andNotField.empty()) {
+  if (!_andOrField.empty()) {
+    for (auto &field : _andOrField) {
+      search_query += " OR " + field.compose();
+    }
+  }
+
+  if (!_andNotField.empty()) {
     isFirst = true;
     search_query += " ANDNOT (";
-    for (auto field : andNotField) {
+    for (auto &field : _andNotField) {
       if (isFirst) {
         isFirst = false;
         search_query += field.compose();
@@ -76,12 +89,12 @@ void Query::prepare() {
     search_query += ")";
   }
 
-  query = search_query;
+  _query = search_query;
 };
 
 Query::Query(CliParser &clip) {
   make(clip);
-  if (andField.empty()) {
+  if (_andField.empty()) {
     std::cout << "Please, compose a query with at least one non-negative "
                  "field, otherwise, the query is useless."
               << std::endl;
@@ -92,13 +105,16 @@ Query::Query(CliParser &clip) {
 
 bool Query::fetch() {
   cpr::Url url{address};
+
   cpr::Parameters parameters =
-      cpr::Parameters{{"search_query", query},
+      cpr::Parameters{{"search_query", _query},
                       {"start", "0"},
-                      {"max_results", std::to_string(max_results)},
+                      {"max_results", std::to_string(_max_results)},
                       {"sortBy", "lastUpdatedDate"},
-                      {"sortOrder", sorting}};
+                      {"sortOrder", _sorting}};
   cpr::Response r = cpr::Get(url, parameters);
+  std::cout << r.url << "\n";
+  std::exit(0);
 
   if (r.status_code == 0) {
     std::cerr << r.error.message << std::endl;
@@ -107,7 +123,7 @@ bool Query::fetch() {
     std::cerr << "Error [" << r.status_code << "] making request" << std::endl;
     return false;
   } else {
-    response = r.text;
+    _response = r.text;
   }
 
   return true;

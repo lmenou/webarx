@@ -28,23 +28,23 @@ CliParser::CliParser(int argc, char *argv[]) {
       "ascend,a", "Show results in ascending order, i.e, from the oldest to the "
                 "most recent\n");
 
-  desc.add(generic).add(query);
+  _desc.add(generic).add(query);
 
   try {
-    store(po::parse_command_line(argc, argv, desc), vm);
-    notify(vm);
-    parsed = true;
+    store(po::parse_command_line(argc, argv, _desc), _vm);
+    notify(_vm);
+    _parsed = true;
   } catch (...) {
-    parsed = false;
+    _parsed = false;
     return;
   }
 
-  if (vm.count("help") || argc == 1) {
-    parsed = false;
+  if (_vm.count("help") || argc == 1) {
+    _parsed = false;
     return;
   }
 
-  if (vm.count("version")) {
+  if (_vm.count("version")) {
     std::cout << "webarx 0.1.0\n";
     std::exit(0);
   }

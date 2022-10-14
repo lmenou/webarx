@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_CASE(field_constructor_no) {
   const std::string search = "title";
   Field field(search, cli);
 
-  BOOST_CHECK_EQUAL(field.isNot(), true);
+  BOOST_CHECK_EQUAL(field.fieldType(), 'N');
   BOOST_CHECK_EQUAL(field.compose(), "title:zola");
 }
 
@@ -18,7 +18,16 @@ BOOST_AUTO_TEST_CASE(field_constructor_yes) {
   const std::string search = "title";
   Field field(search, cli);
 
-  BOOST_CHECK_EQUAL(field.isNot(), false);
+  BOOST_CHECK_EQUAL(field.fieldType(), 'a');
+  BOOST_CHECK_EQUAL(field.compose(), "title:zola");
+}
+
+BOOST_AUTO_TEST_CASE(field_constructor_or) {
+  const std::string cli = "Ozola";
+  const std::string search = "title";
+  Field field(search, cli);
+
+  BOOST_CHECK_EQUAL(field.fieldType(), 'O');
   BOOST_CHECK_EQUAL(field.compose(), "title:zola");
 }
 

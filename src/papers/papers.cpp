@@ -1,6 +1,6 @@
 #include "papers.hpp"
+#include "tinyxml2.h"
 #include <iostream>
-#include <tinyxml2.h>
 
 Papers::Papers(std::string &response) {
   tinyxml2::XMLDocument doc;
@@ -37,17 +37,17 @@ Papers::Papers(std::string &response) {
         }
         paper.authors = authors;
       }
-      papers.push_back(std::move(paper));
+      _papers.push_back(std::move(paper));
     }
   }
 
-  papers_count = papers.size();
+  _papers_count = _papers.size();
 }
 
 std::vector<std::string> Papers::getTitles() const {
   std::vector<std::string> titles{};
 
-  for (auto paper : papers) {
+  for (auto paper : _papers) {
     titles.push_back(paper.title);
   }
 

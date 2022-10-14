@@ -8,14 +8,14 @@ namespace po = boost::program_options;
 
 class CliParser {
 private:
-  po::options_description desc;
-  po::variables_map vm{};
-  bool parsed{};
+  po::options_description _desc;
+  po::variables_map _vm;
+  bool _parsed;
 
 public:
   CliParser(int argc, char *argv[]);
-  po::variables_map getCliOptions() { return vm; }
-  po::options_description getDesc() { return desc; }
-  bool cliParsed() { return parsed; };
+  po::variables_map getCliOptions() { return _vm; }
+  po::options_description getDesc() { return _desc; }
+  bool cliParsed() { return _parsed; };
 };
 #endif

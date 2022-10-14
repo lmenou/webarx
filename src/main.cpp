@@ -25,8 +25,7 @@ int main(int argc, char *argv[]) {
 
   Papers papers(response);
   if (papers.empty()) {
-    std::cout
-        << "There is no results for your query, please make a new one.\n";
+    std::cout << "There is no results for your query, please make a new one.\n";
     return EXIT_SUCCESS;
   }
 

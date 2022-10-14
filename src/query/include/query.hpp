@@ -6,16 +6,20 @@
 #include <map>
 #include <string>
 
+namespace QueryUtil {
+bool isupper(char ch);
+};
+
 class Field {
 private:
-  std::string search{};
-  std::string field{};
-  bool notField{};
+  std::string _search;
+  std::string _field;
+  char _fType{'a'};
 
 public:
   Field(const std::string prefix, const std::string cliArg);
-  bool isNot() const { return notField; }
-  std::string compose() const { return field + ":" + search; }
+  char fieldType() const { return _fType; }
+  std::string compose() const { return _field + ":" + _search; }
 
   friend std::ostream &operator<<(std::ostream &os, const Field &f) {
     std::string repr = f.compose();
@@ -26,14 +30,15 @@ public:
 
 class Query {
 private:
-  std::vector<Field> andField{};
-  std::vector<Field> andNotField{};
-  std::string response{};
-  std::string query{};
-  int max_results{};
-  std::string sorting;
+  std::vector<Field> _andField;
+  std::vector<Field> _andNotField;
+  std::vector<Field> _andOrField;
+  std::string _response;
+  std::string _query;
+  int _max_results;
+  std::string _sorting;
 
-  static const std::map<std::string, std::string> prefixes;
+  static const std::map<std::string, std::string> _prefixes;
 
   void make(CliParser &clip);
   void prepare();
@@ -41,12 +46,12 @@ private:
 public:
   static const std::string address;
   Query(CliParser &clip);
-  std::string getQuery() const { return query; }
-  std::string getResponse() const { return response; }
+  std::string getQuery() const { return _query; }
+  std::string getResponse() const { return _response; }
   bool fetch();
 
   friend std::ostream &operator<<(std::ostream &os, const Query &q) {
-    os << q.query;
+    os << q._query;
     return os;
   }
 };

@@ -1,6 +1,6 @@
 #define BOOST_TEST_MODULE "PapersTest"
-#include "papers.hpp"
 #include "cliparser.hpp"
+#include "papers.hpp"
 #include "query.hpp"
 #include <boost/test/unit_test.hpp>
 #include <fstream>
@@ -33,37 +33,37 @@ BOOST_AUTO_TEST_CASE(papers_fetch_yes) {
   Query q(cli);
   bool success = q.fetch();
 
-  if(success) {
+  if (success) {
     std::string response = q.getResponse();
     Papers papers(response);
 
     BOOST_CHECK_EQUAL(papers.size(), 1);
-  }
-  else {
+  } else {
     std::exit(EXIT_FAILURE);
   }
 }
 
 BOOST_AUTO_TEST_CASE(papers_fetch_no) {
-  int argc = 5;
+  int argc = 7;
   char name[] = "name.cpp";
   char authors[] = "--authors";
   char author_name[] = "del_maestro";
   char title[] = "--title";
   char title_value[] = "Ncheckerboard";
-  char *argv[] = {name, authors, author_name, title, title_value};
+  char max_res[] = "--max-results";
+  char max[] = "10";
+  char *argv[] = {name, authors, author_name, title, title_value, max_res, max};
   CliParser cli(argc, argv);
 
   Query q(cli);
   bool success = q.fetch();
 
-  if(success) {
+  if (success) {
     std::string response = q.getResponse();
     Papers papers(response);
 
-    BOOST_CHECK_EQUAL(papers.size(), 53);
-  }
-  else {
+    BOOST_CHECK_EQUAL(papers.size(), 8);
+  } else {
     std::exit(EXIT_FAILURE);
   }
 }
