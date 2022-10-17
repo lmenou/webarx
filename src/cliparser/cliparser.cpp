@@ -23,10 +23,11 @@ CliParser::CliParser(int argc, char *argv[]) {
       "If you do not want to search for the word in the abstract, write N in "
       "front of the word\n"
       "  Example: webarx --abstract alcool Ngervaise")(
-      "max-results,M", po::value<int>()->default_value(300),
+      "max-results,M", po::value<int>()->default_value(10),
       "Maximum number of results you wish")(
-      "ascend,a", "Show results in ascending order, i.e, from the oldest to the "
-                "most recent\n");
+      "ascend,a",
+      "Show results in ascending order, i.e, from the oldest to the "
+      "most recent\n");
 
   _desc.add(generic).add(query);
 

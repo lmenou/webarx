@@ -113,8 +113,6 @@ bool Query::fetch() {
                       {"sortBy", "lastUpdatedDate"},
                       {"sortOrder", _sorting}};
   cpr::Response r = cpr::Get(url, parameters);
-  std::cout << r.url << "\n";
-  std::exit(0);
 
   if (r.status_code == 0) {
     std::cerr << r.error.message << std::endl;

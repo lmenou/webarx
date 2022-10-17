@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(papers_fetch_no) {
     std::string response = q.getResponse();
     Papers papers(response);
 
-    BOOST_CHECK_EQUAL(papers.size(), 8);
+    BOOST_CHECK_EQUAL(papers.size(), 10);
   } else {
     std::exit(EXIT_FAILURE);
   }
