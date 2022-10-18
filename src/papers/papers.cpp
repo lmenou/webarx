@@ -1,6 +1,28 @@
 #include "papers.hpp"
-#include "tinyxml2.h"
 #include <iostream>
+
+Paper::Paper(tinyxml2::XMLElement *el) {
+  tinyxml2::XMLElement *title = el->FirstChildElement("title");
+  tinyxml2::XMLElement *summary = el->FirstChildElement("summary");
+  tinyxml2::XMLElement *id = el->FirstChildElement("id");
+  tinyxml2::XMLElement *updated = el->FirstChildElement("updated");
+
+  if (summary && title && id && updated) {
+    this->title = title->GetText();
+    this->summary = summary->GetText();
+    this->updated = updated->GetText();
+    this->id = id->GetText();
+  }
+
+   std::vector<std::string> authors;
+   for (tinyxml2::XMLNode *auth = el->FirstChildElement("author"); auth;
+        auth = auth->NextSibling()) {
+     tinyxml2::XMLElement *a = auth->FirstChildElement("name");
+     if (a)
+       authors.push_back(a->GetText());
+   }
+   this->authors = authors;
+}
 
 Papers::Papers(std::string &response) {
   tinyxml2::XMLDocument doc;
@@ -9,47 +31,59 @@ Papers::Papers(std::string &response) {
   tinyxml2::XMLHandle handle(&doc);
 
   tinyxml2::XMLElement *feed = handle.FirstChildElement("feed").ToElement();
-
-  Paper paper;
   if (feed) {
-    for (tinyxml2::XMLNode *e = feed->FirstChildElement("entry"); e;
-         e = e->NextSibling()) {
-      tinyxml2::XMLElement *el = e->ToElement();
-      if (el) {
-        tinyxml2::XMLElement *summary = el->FirstChildElement("summary");
-        tinyxml2::XMLElement *title = el->FirstChildElement("title");
-        tinyxml2::XMLElement *url = el->FirstChildElement("id");
-        tinyxml2::XMLElement *date = el->FirstChildElement("updated");
+    tinyxml2::XMLNode *num_item =
+        feed->FirstChildElement("opensearch:itemsPerPage");
+    tinyxml2::XMLElement *el_item = num_item->ToElement();
+    tinyxml2::XMLNode *num_result =
+        feed->FirstChildElement("opensearch:totalResults");
+    tinyxml2::XMLElement *el_result = num_result->ToElement();
 
-        if (summary && title && url) {
-          paper.abstract = summary->GetText();
-          paper.title = title->GetText();
-          paper.url = url->GetText();
-          paper.date = date->GetText();
-        }
-
-        std::vector<std::string> authors{};
-        for (tinyxml2::XMLNode *auth = el->FirstChildElement("author"); auth;
-             auth = auth->NextSibling()) {
-          tinyxml2::XMLElement *a = auth->FirstChildElement("name");
-          if (a)
-            authors.push_back(a->GetText());
-        }
-        paper.authors = authors;
-      }
-      _papers.push_back(std::move(paper));
+    if (el_item && el_result) {
+      int m = std::stoi(el_item->GetText());
+      int n = std::stoi(el_result->GetText());
+      _papers_count = (m > n) ? n : m;
+    } else {
+      std::cout << "An error occured while parsing the query result, please "
+                   "report the error to the developer\n";
     }
-  }
 
-  _papers_count = _papers.size();
+    if (_papers_count == 0) {
+      std::cout
+          << "Your query returned an empty result, please make a new one.\n";
+      std::exit(0);
+    } else {
+      std::vector<Paper> papers;
+      papers.reserve(_papers_count);
+
+      tinyxml2::XMLNode *e{feed->FirstChildElement("entry")};
+      tinyxml2::XMLElement *el{nullptr};
+      for (int i = 0; i < _papers_count; i++) {
+        el = e->ToElement();
+        if (el) {
+          Paper paper(el);
+          papers.push_back(paper);
+          e = e->NextSibling();
+        } else {
+          std::cerr << "An error occured while parsing the response, please "
+                       "report the error to the developer\n";
+          std::exit(1);
+        }
+      }
+
+      _papers = std::move(papers);
+    }
+  } else {
+    std::cout << "Your query returned a wrongly formatted result, please "
+                 "report the error to the developer\n";
+  }
 }
 
 std::vector<std::string> Papers::getTitles() const {
-  std::vector<std::string> titles{};
+  std::vector<std::string> titles(_papers_count);
 
-  for (auto paper : _papers) {
-    titles.push_back(paper.title);
+  for (int i = 0; i < _papers_count; i++) {
+    titles[i] = _papers[i].title;
   }
-
   return titles;
 }

@@ -1,16 +1,19 @@
 #ifndef _PARSING_H_
 #define _PARSING_H_
 
+#include "tinyxml2.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
 struct Paper {
   std::string title;
-  std::string abstract;
-  std::string url;
-  std::string date;
+  std::string summary;
+  std::string id;
+  std::string updated;
   std::vector<std::string> authors;
+
+  Paper(tinyxml2::XMLElement *el);
 };
 
 class Papers {
