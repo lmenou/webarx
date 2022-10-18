@@ -20,19 +20,18 @@ void TUI::show(const Papers &papers) const {
                              size(ftxui::HEIGHT, ftxui::LESS_THAN, 10));
   });
 
-  auto abstract_window = ftxui::Renderer([&] {
-    std::string abstract = papers[selected].abstract;
-    return ftxui::window(ftxui::text("Abstract"), ftxui::paragraph(abstract));
+  auto summary_window = ftxui::Renderer([&] {
+    return ftxui::window(ftxui::text("Abstract"),
+                         ftxui::paragraph(papers[selected].summary));
   });
 
-  auto url_window = ftxui::Renderer([&] {
-    std::string url = papers[selected].url;
-    return ftxui::window(ftxui::text("Url"), ftxui::text(url));
+  auto id_window = ftxui::Renderer([&] {
+    return ftxui::window(ftxui::text("Url"), ftxui::text(papers[selected].id));
   });
 
-  auto date_window = ftxui::Renderer([&] {
-    std::string date = papers[selected].date;
-    return ftxui::window(ftxui::text("Posting Date"), ftxui::text(date));
+  auto updated_window = ftxui::Renderer([&] {
+    return ftxui::window(ftxui::text("Posting Date"),
+                         ftxui::text(papers[selected].updated));
   });
 
   auto authors_window = ftxui::Renderer([&] {
@@ -47,14 +46,14 @@ void TUI::show(const Papers &papers) const {
   });
 
   auto info_window = ftxui::Container::Horizontal({
-      url_window,
-      date_window,
+      id_window,
+      updated_window,
       authors_window,
   });
 
   auto global = ftxui::Container::Vertical({
       menu_titles_window,
-      abstract_window,
+      summary_window,
       info_window,
   });
 
