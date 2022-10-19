@@ -4,8 +4,8 @@ Find paper on Arxiv :postbox: :bookmark_tabs: in your terminal !
 ## Problem :triumph:
 Subscribing or scrolling ArXiv or is time-consuming, there must be a way to
 automate our need of curiosity. The aim of this project is to build a simple
-CLI to query the API of the websites. Let us have a direct access to new
-papers, their authors' names and their abstract right from the terminal !
+CLI to query the API of the website. Let us have a direct access to new papers,
+their authors' names and their abstract right from the terminal !
 
 This software targets mainly UNIX users (MacOS, Linux) and is not tested (yet?)
 on Windows, *BSD.   
