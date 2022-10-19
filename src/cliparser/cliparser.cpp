@@ -12,17 +12,26 @@ CliParser::CliParser(int argc, char *argv[]) {
       "title,T", po::value<std::vector<std::string>>()->multitoken(),
       "List of words that can be contained in the title\n"
       "If you do not want the word contained, write N in front of the word\n"
-      "  Example: webarx --title assommoir Nalcool")(
+      "  Example: webarx --title assommoir Nalcool\n"
+      "If you want to say that a word can be contained in the query, write O "
+      "in front of the word (for 'Or')\n"
+      "  Example: webarx --title assommoir Oeau")(
       "authors,A", po::value<std::vector<std::string>>()->multitoken(),
       "List of authors to search for\n"
       "If you do not want to search for an author, write N in front of the "
       "name of the author\n"
-      "  Example: webarx --authors zola Nmauppassant")(
+      "  Example: webarx --authors zola Nmauppassant\n"
+      "If you want to say that an author may be search for, write O in front "
+      "of the word\n"
+      "  Example: webarx --authors zola Omauppassant")(
       "abstract,R", po::value<std::vector<std::string>>()->multitoken(),
       "List of words to search for in the resume or abstract\n"
       "If you do not want to search for the word in the abstract, write N in "
       "front of the word\n"
-      "  Example: webarx --abstract alcool Ngervaise")(
+      "  Example: webarx --abstract alcool Ngervaise\n"
+      "If you want to say that a word may be present in the abstract, write O "
+      "in front of the word\n"
+      "  Example: webarx --abstract alcool Ogervaise")(
       "max-results,M", po::value<int>()->default_value(10),
       "Maximum number of results you wish")(
       "ascend,a",
