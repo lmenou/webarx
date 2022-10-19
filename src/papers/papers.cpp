@@ -14,14 +14,14 @@ Paper::Paper(tinyxml2::XMLElement *el) {
     this->id = id->GetText();
   }
 
-   std::vector<std::string> authors;
-   for (tinyxml2::XMLNode *auth = el->FirstChildElement("author"); auth;
-        auth = auth->NextSibling()) {
-     tinyxml2::XMLElement *a = auth->FirstChildElement("name");
-     if (a)
-       authors.push_back(a->GetText());
-   }
-   this->authors = authors;
+  std::vector<std::string> authors;
+  for (tinyxml2::XMLNode *auth = el->FirstChildElement("author"); auth;
+       auth = auth->NextSibling()) {
+    tinyxml2::XMLElement *a = auth->FirstChildElement("name");
+    if (a)
+      authors.push_back(a->GetText());
+  }
+  this->authors = authors;
 }
 
 Papers::Papers(std::string &response) {
@@ -56,18 +56,15 @@ Papers::Papers(std::string &response) {
       std::vector<Paper> papers;
       papers.reserve(_papers_count);
 
-      tinyxml2::XMLNode *e{feed->FirstChildElement("entry")};
-      tinyxml2::XMLElement *el{nullptr};
-      for (int i = 0; i < _papers_count; i++) {
-        el = e->ToElement();
+      for (tinyxml2::XMLNode *e = feed->FirstChildElement("entry"); e;
+           e = e->NextSibling()) {
+        tinyxml2::XMLElement *el = e->ToElement();
         if (el) {
           Paper paper(el);
-          papers.push_back(paper);
-          e = e->NextSibling();
+          papers.push_back(std::move(paper));
         } else {
-          std::cerr << "An error occured while parsing the response, please "
+          std::cerr << "An error occurred while parsing the response, please "
                        "report the error to the developer\n";
-          std::exit(1);
         }
       }
 
