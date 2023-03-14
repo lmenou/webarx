@@ -17,10 +17,9 @@ on Windows, *BSD.
 ### Requirements :lock_with_ink_pen:
 The build of the software is cmake based. The following *needs* to be installed
 on the system:   
-- OpenSSL, minimal version 2.8.3
 - CMake, minimal version 3.20
-- Git, minimal version 2.37 (to fetch third party libraries)
-- Boost, minimal version 1.78
+- Git, minimal version 2.34 (to fetch third party libraries)
+- Boost, minimal version 1.74
 
 The software is also using [CURL](https://curl.se/) under the hood, hence, you
 can speed up the build process by installing the latter. However, if not found,
