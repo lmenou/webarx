@@ -1,5 +1,5 @@
 enable_testing()
-find_package(Boost 1.78.0 REQUIRED COMPONENTS unit_test_framework)
+find_package(Boost 1.74.0 REQUIRED COMPONENTS unit_test_framework)
 
 function(add_boost_test SOURCE_FILE_NAME DEPENDENCY_LIB)
   get_filename_component(TEST_EXECUTABLE_NAME ${SOURCE_FILE_NAME} NAME_WE)

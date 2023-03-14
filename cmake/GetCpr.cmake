@@ -27,4 +27,12 @@ else()
   message(STATUS "See cmake/GetCpr.cmake to set this option")
 endif()
 
+message(STATUS "No need of OpenSSL for ArXiV API")
+set(CPR_ENABLE_SSL
+    OFF
+    CACHE
+      BOOL
+      "Enables or disables the SSL backend. Required to perform HTTPS requests."
+)
+
 FetchContent_MakeAvailable(cpr)
