@@ -84,3 +84,5 @@ libraries:
 - TinyXML2 from Lee Thomason
 - Boost from The Boost organization
 - FTXUI from  ArthurSonzogni (Copyright (c) 2019 Arthur Sonzogni.)
+
+Also, Thank you to arXiv for use of its open access interoperability.
