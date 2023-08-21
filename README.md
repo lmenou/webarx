@@ -73,7 +73,7 @@ to receive some constructive critics. This is a work in progress, even in my
 view, some parts of the code are not elegant at all, I am working on it :grin:.
 
 ## LICENSE :bookmark:
-This software is MIT licensed. See the
+This software is GNU (version 3) licensed. See the
 [LICENSE](https://github.com/lmenou/webarx/blob/master/LICENSE) file for more
 information.
 
