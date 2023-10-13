@@ -1,6 +1,12 @@
 # webarx
 Find paper on Arxiv :postbox: :bookmark_tabs: in your terminal !
 
+## :warning: Disclaimer :warning:
+
+Use it at your own risk ! The software is not finished and may crash at any
+time. Plus, before any use, reading the [Term of Use of the ArXiv
+API](https://info.arxiv.org/help/api/tou.html) is strongly recommended.
+
 ## Problem :triumph:
 Subscribing or scrolling ArXiv or is time-consuming, there must be a way to
 automate our need of curiosity. The aim of this project is to build a simple
